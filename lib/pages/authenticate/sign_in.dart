@@ -1,11 +1,11 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/service/auth/authService.dart';
 import 'package:girlfriend_translator/utils/loading.dart';
 
 class SignIn extends StatefulWidget {
-  const SignIn({super.key, required this.toggleView});
+  const SignIn({super.key});
 
-  final Function toggleView;
   @override
   State<SignIn> createState() => _SignInState();
 }
@@ -23,77 +23,108 @@ class _SignInState extends State<SignIn> {
 
   @override
   Widget build(BuildContext context) {
+    // height space
+    double space = MediaQuery.of(context).size.width;
+
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.purple[100],
-      appBar: AppBar(
-        title: Text('Sign In', style: TextStyle(color: Colors.white),),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple,
-        actions: [
-          TextButton.icon(
-            icon: Icon(Icons.person, color: Colors.white,),
-            label: Text('Register', style: TextStyle(color: Colors.white),),
-            onPressed: (){
-              widget.toggleView();
-            },
-          )
-        ],
-      ),
       body: Container(
-        padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 50),
-        child: Form(
-          key: _formKey,
-          child: Column(
-            children: <Widget>[
-              SizedBox(height: 20.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Email',
-                ),
-                validator: (value){
-                  return value!.isEmpty ? 'Enter an Email' : null;
-                },
-                onChanged: (value){
-                  setState(() {
-                    email = value;
-                  });
-                },
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg-first.jpg'), fit: BoxFit.cover
+          )
+        ),
+        padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 50),
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            // SizedBox(height: space * .35,),
+            Container(
+              // margin: const EdgeInsets.only(top: 50),
+              width: space,
+              height: space * .5,
+              decoration: const BoxDecoration(
+                image: DecorationImage(
+                  image: AssetImage('assets/signIn.png')
+                )
               ),
-              SizedBox(height: 20.0,),
-              TextFormField(
-                decoration: InputDecoration(
-                  hintText: 'Password',
-                ),
-                validator: (value){
-                  return value!.length < 6 ? 'Password must have more than 6 characters' : null;
-                },
-                obscureText: true,
-                onChanged: (value){
-                  pwd = value;
-                },
-              ),
-              SizedBox(height: 20.0,),
-              ElevatedButton(
-                style: ElevatedButton.styleFrom(
-                  backgroundColor: Colors.purple
-                ),
-                onPressed: () async {
-                  if(_formKey.currentState!.validate()){
-                    setState(() {
-                      loading = true;
-                    });
-                    dynamic result = await _auth.signIn(email, pwd);
-                    if(result == null){
+            ),
+            Form(
+              key: _formKey,
+              child: Column(
+                children: <Widget>[
+                  const Text('Log In Your Account.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
+                  const SizedBox(height: 20.0,),
+                  TextFormField(
+                    decoration:  InputDecoration(
+                      hintText: 'Email',
+                      filled: true,
+                      fillColor: Colors.purple[50],
+                    ),
+                    validator: (value){
+                      return value!.isEmpty ? 'Enter an Email' : null;
+                    },
+                    onChanged: (value){
                       setState(() {
-                        error = 'invalid credentials';
-                        loading = false;
+                        email = value;
                       });
-                    }
-                  }
-                },
-                child: Text('Sign In', style: TextStyle(color: Colors.white,)))
-            ],
-          ),
+                    },
+                  ),
+                  const SizedBox(height: 15.0,),
+                  TextFormField(
+                    decoration:  InputDecoration(
+                      hintText: 'Password',
+                      filled: true,
+                      fillColor: Colors.purple[50],
+                    ),
+                    validator: (value){
+                      return value!.length < 6 ? 'Password must have more than 6 characters' : null;
+                    },
+                    obscureText: true,
+                    onChanged: (value){
+                      pwd = value;
+                    },
+                  ),
+                ],
+              ),
+            ),
+
+            Column(
+              children: [
+                ElevatedButton(
+                    style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.purple,
+                        padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.0)
+                    ),
+                    onPressed: () async {
+                      if(_formKey.currentState!.validate()){
+                        setState(() {
+                          loading = true;
+                        });
+                        dynamic result = await _auth.registration(email, pwd);
+                        if(result == null){
+                          setState(() {
+                            error = 'invalid credentials';
+                            loading = false;
+                          });
+                        }
+                      }
+                    },
+                    child: const Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 16.0))),
+                const SizedBox(height: 10.0,),
+                RichText(
+                  text: TextSpan(
+                      text: "You don't have an account?",
+                      style: const TextStyle(color: Colors.black54),
+                      children: [
+                        TextSpan(text: ' Sign Up', style: const TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
+                            recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/register'))
+                      ]
+                  ),
+                )
+              ],
+            ),
+
+          ],
         )
       ),
     );

@@ -6,9 +6,8 @@ import 'package:girlfriend_translator/utils/constants.dart';
 import '../../utils/loading.dart';
 
 class Register extends StatefulWidget {
-  const Register({super.key, required this.toggleView});
+  const Register({super.key});
 
-  final Function toggleView;
   @override
   State<Register> createState() => _RegisterState();
 }
@@ -124,42 +123,40 @@ class _RegisterState extends State<Register> {
                   ],
                 ),
               ),
-              Container(
-                child: Column(
-                  children: [
-                    ElevatedButton(
-                        style: ElevatedButton.styleFrom(
-                            backgroundColor: Colors.purple,
-                            padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.0)
-                        ),
-                        onPressed: () async {
-                          if(_formKey.currentState!.validate()){
+              Column(
+                children: [
+                  ElevatedButton(
+                      style: ElevatedButton.styleFrom(
+                          backgroundColor: Colors.purple,
+                          padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.0)
+                      ),
+                      onPressed: () async {
+                        if(_formKey.currentState!.validate()){
+                          setState(() {
+                            loading = true;
+                          });
+                          dynamic result = await _auth.registration(email, pwd);
+                          if(result == null){
                             setState(() {
-                              loading = true;
+                              error = 'invalid credentials';
+                              loading = false;
                             });
-                            dynamic result = await _auth.registration(email, pwd);
-                            if(result == null){
-                              setState(() {
-                                error = 'invalid credentials';
-                                loading = false;
-                              });
-                            }
                           }
-                        },
-                        child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 16.0))),
-                    SizedBox(height: 10.0,),
-                    RichText(
-                        text: TextSpan(
-                          text: 'Already have an account?',
-                          style: TextStyle(color: Colors.black54),
-                          children: [
-                            TextSpan(text: ' Sign In', style: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
-                                recognizer: TapGestureRecognizer()..onTap = () => print('Yest'))
-                          ]
-                        ),
-                    )
-                  ],
-                ),
+                        }
+                      },
+                      child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 16.0))),
+                  const SizedBox(height: 10.0,),
+                  RichText(
+                      text: TextSpan(
+                        text: 'Already have an account?',
+                        style: const TextStyle(color: Colors.black54),
+                        children: [
+                          TextSpan(text: ' Sign In', style: const TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
+                              recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/login'))
+                        ]
+                      ),
+                  )
+                ],
               ),
 
             ],
