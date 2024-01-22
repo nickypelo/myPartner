@@ -81,7 +81,7 @@ class _GreetingState extends State<Greeting> {
                         padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 8.0)
                       ),
                         onPressed: (){
-                        Navigator.pushReplacementNamed(context, 'signIn');
+                        Navigator.pushReplacementNamed(context, '/login');
                         },
                         child: const Text('Lady', style: TextStyle(fontSize: 24.0,color: Colors.white, fontWeight: FontWeight.bold),)
                     ),
@@ -144,6 +144,7 @@ class _GreetingState extends State<Greeting> {
                             padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 8.0)
                         ),
                         onPressed: (){
+                          Navigator.pushReplacementNamed(context, '/register');
                         },
                         child: const Text('Sign Up', style: TextStyle(fontSize: 24.0,color: Colors.white, fontWeight: FontWeight.bold),)
                     ),

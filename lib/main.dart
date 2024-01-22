@@ -1,6 +1,7 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/component/content/music.dart';
+import 'package:girlfriend_translator/pages/authenticate/register.dart';
 import 'package:girlfriend_translator/pages/authenticate/sign_in.dart';
 import 'package:girlfriend_translator/pages/greeting.dart';
 import 'package:girlfriend_translator/pages/home.dart';
@@ -61,9 +62,10 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => Greeting(),
+          '/': (context) => Register(toggleView: (){}),
           '/moreInfo': (context) => MoreInfo(),
-          'signIn': (context) => SignIn(toggleView: (){})
+          '/register': (context) => Register(toggleView: (){}),
+          '/login': (context) => SignIn(toggleView: (){})
         },
       ),
     );

@@ -1,3 +1,4 @@
+import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/service/auth/authService.dart';
 import 'package:girlfriend_translator/utils/constants.dart';
@@ -18,81 +19,150 @@ class _RegisterState extends State<Register> {
   bool loading = false;
 
   // text field state
+  String _fullName = '';
+  String _ladyFullName = '';
   String email = '';
   String pwd = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
+
+    //
+    double space = MediaQuery.of(context).size.width;
+
     return loading ? Loading() : Scaffold(
-      backgroundColor: Colors.purple[100],
-      appBar: AppBar(
-        title: Text('Register', style: TextStyle(color: Colors.white),),
-        centerTitle: true,
-        backgroundColor: Colors.deepPurple,
-        actions: [
-          TextButton.icon(
-            icon: Icon(Icons.person, color: Colors.white,),
-            label: Text('Sign In', style: TextStyle(color: Colors.white),),
-            onPressed: (){
-              widget.toggleView();
-            },
-          )
-        ],
-      ),
       body: Container(
-          padding: EdgeInsets.symmetric(vertical: 24.0, horizontal: 50),
-          child: Form(
-            key: _formKey,
-            child: Column(
-              children: <Widget>[
-                SizedBox(height: 20.0,),
-                TextFormField(
-                  decoration: textInputDecoration,
-                  validator: (value){
-                    return value!.isEmpty ? 'Enter an Email' : null;
-                  },
-                  onChanged: (value){
-                    setState(() {
-                      email = value;
-                    });
-                  },
-                ),
-                SizedBox(height: 20.0,),
-                TextFormField(
-                  decoration: InputDecoration(
-                    hintText: 'Password',
-                  ),
-                  validator: (value){
-                    return value!.length < 6 ? 'Password must have more than 6 characters' : null;
-                  },
-                  obscureText: true,
-                  onChanged: (value){
-                    pwd = value;
-                  },
-                ),
-                SizedBox(height: 20.0,),
-                ElevatedButton(
-                    style: ElevatedButton.styleFrom(
-                        backgroundColor: Colors.purple
-                    ),
-                    onPressed: () async {
-                      if(_formKey.currentState!.validate()){
+        decoration: const BoxDecoration(
+          image: DecorationImage(
+            image: AssetImage('assets/bg-first.jpg'), fit: BoxFit.cover
+          )
+        ),
+          padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 50),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+             const Text('Register Your Account.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
+              Form(
+                key: _formKey,
+                child: Column(
+                  children: <Widget>[
+                    const SizedBox(height: 10.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Full Names:',
+                        filled: true,
+                        fillColor: Colors.purple[50]
+                      ),
+                      validator: (value){
+                        return value!.isEmpty ? 'Cannot be empty.' : null;
+                      },
+                      onChanged: (value){
                         setState(() {
-                          loading = true;
+                          _fullName = value;
                         });
-                        dynamic result = await _auth.registration(email, pwd);
-                        if(result == null){
-                          setState(() {
-                            error = 'invalid credentials';
-                            loading = false;
-                          });
-                        }
-                      }
-                    },
-                    child: Text('Register', style: TextStyle(color: Colors.white,)))
-              ],
-            ),
+                      },
+                    ),
+                    const SizedBox(height: 10.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Your Email:",
+                        filled: true,
+                        fillColor: Colors.purple[50],
+                      ),
+                      validator: (value){
+                        return value!.isEmpty ? 'Enter a valid email.' : null;
+                      },
+                      onChanged: (value){
+                        email = value;
+                      },
+                    ),
+                    const SizedBox(height: 10.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: "Your Lady's full Names:",
+                        filled: true,
+                        fillColor: Colors.purple[50],
+                      ),
+                      validator: (value){
+                        return value!.isEmpty ? 'Cannot be empty.' : null;
+                      },
+                      onChanged: (value){
+                        _ladyFullName = value;
+                      },
+                    ),
+                    const SizedBox(height: 10.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Create Password',
+                        filled: true,
+                        fillColor: Colors.purple[50],
+                      ),
+                      validator: (value){
+                        return value!.length < 6 ? 'Password must have more than 6 characters' : null;
+                      },
+                      obscureText: true,
+                      onChanged: (value){
+                        pwd = value;
+                      },
+                    ),
+                    const SizedBox(height: 10.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                        hintText: 'Confirm Password',
+                        filled: true,
+                        fillColor: Colors.purple[50],
+                      ),
+                      validator: (value){
+                        return value!.length < 6 ? 'Passwords must match' : null;
+                      },
+                      obscureText: true,
+                      onChanged: (value){
+                        pwd = value;
+                      },
+                    ),
+                  ],
+                ),
+              ),
+              Container(
+                child: Column(
+                  children: [
+                    ElevatedButton(
+                        style: ElevatedButton.styleFrom(
+                            backgroundColor: Colors.purple,
+                            padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.0)
+                        ),
+                        onPressed: () async {
+                          if(_formKey.currentState!.validate()){
+                            setState(() {
+                              loading = true;
+                            });
+                            dynamic result = await _auth.registration(email, pwd);
+                            if(result == null){
+                              setState(() {
+                                error = 'invalid credentials';
+                                loading = false;
+                              });
+                            }
+                          }
+                        },
+                        child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 16.0))),
+                    SizedBox(height: 10.0,),
+                    RichText(
+                        text: TextSpan(
+                          text: 'Already have an account?',
+                          style: TextStyle(color: Colors.black54),
+                          children: [
+                            TextSpan(text: ' Sign In', style: TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
+                                recognizer: TapGestureRecognizer()..onTap = () => print('Yest'))
+                          ]
+                        ),
+                    )
+                  ],
+                ),
+              ),
+
+            ],
           )
       ),
     );
