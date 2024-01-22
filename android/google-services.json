@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "795558130091",
+    "project_id": "girlfriend-translator",
+    "storage_bucket": "girlfriend-translator.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:795558130091:android:42e42ac134505dd767a2ee",
+        "android_client_info": {
+          "package_name": "com.nicodemus.girlfriend_translator"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyBWUhTveEJAD8YYUFvX4TgK91fdzDzXYPs"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
