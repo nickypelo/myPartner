@@ -41,12 +41,13 @@ class _RegisterState extends State<Register> {
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-             const Text('Register Your Account.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
               Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    const SizedBox(height: 10.0,),
+                    const Text('Register Your Account.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
+
+                    const SizedBox(height: 50.0,),
                     TextFormField(
                       decoration: InputDecoration(
                         hintText: 'Full Names:',

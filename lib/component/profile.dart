@@ -1,3 +1,5 @@
+import 'dart:ui';
+
 import 'package:flutter/material.dart';
 
 
@@ -6,50 +8,84 @@ class Profile extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-      // margin: EdgeInsets.all(8.0),
-      padding: EdgeInsets.symmetric(horizontal: 12.0, vertical: 16.0),
-      width: MediaQuery.of(context).size.width,
-      height: MediaQuery.of(context).size.height * .25,
-      decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(20), // Adjust radius as needed
-          bottomRight: Radius.circular(20),),
-        boxShadow:[ BoxShadow(color: Colors.black, blurRadius: 4.0,)],
-        color: Colors.green[600],
-      ),
-      child: Row(
-        // mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        children: <Widget>[
-          CircleAvatar(
-            backgroundColor: Colors.black,
-            radius: MediaQuery.of(context).size.width * .17,
-          ),
-          Container(
-            margin: const EdgeInsets.only(left: 16.0),
-            width: MediaQuery.of(context).size.width * .55,
-            child:  const Card(
-              color: Colors.deepPurple,
-              child: Padding(
-                padding:  EdgeInsets.all(8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: <Widget>[
-                    // Text('Name:'),
-                    // Text('Rhulani Peloeahae', style: TextStyle(fontWeight: FontWeight.bold)),
-                    RichTxt(label: 'Name', user: 'Rhulani'),
-                    RichTxt(label: 'Birthday', user: '1 April'),
-                    RichTxt(label: 'From', user: 'Nicholas'),
-                    RichTxt(label: 'Anniversary', user: '30 December')
-                  ],
+
+    //sizes
+    double breadth = MediaQuery.of(context).size.width;
+    double screenHeight = MediaQuery.of(context).size.height;
+
+    return
+        ClipRRect(
+          child: BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: 5.0, sigmaY: 5.0),
+            child: Container(
+              width: breadth * .92,
+              margin: const EdgeInsets.only(top: 30.0),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(40.0),
+                border: Border.all(
+                  color: Colors.deepPurple,
+                  width: 2.0
                 ),
+            
+              ),
+              padding: const EdgeInsets.all(12.0),
+              child: Column(
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: <Widget>[
+                      Expanded(
+                        flex: 2,
+                        child: Container(
+                          padding: const EdgeInsets.fromLTRB(4, 12, 0, 0),
+                          width: MediaQuery.of(context).size.width * .5,
+                          height: 80,
+                          child: const ListTile(
+                            title: Text('Rhulani baby girl', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
+                            subtitle: Text('Surname'),
+                            ),
+                          ),
+                      ),
+                      const Expanded(
+                        flex: 1,
+                        child: CircleAvatar(
+                          // backgroundColor: Colors.black,
+                          backgroundImage: AssetImage('assets/profile.png'),
+                          radius: 42,
+                        ),
+                      ),
+                    ],
+                  ),
+                  const SizedBox(height: 8.0,),
+                  ClipRRect(
+                    child: BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 10.0, sigmaY: 10.0),
+                      child: SizedBox(
+                        width: breadth,
+                        height: screenHeight * .15,
+                        child: const Card(
+                          color: Colors.transparent,
+                          child: Padding(
+                            padding:  EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: <Widget>[
+                                RichTxt(label: 'Birthday', user: ': 1 April'),
+                                RichTxt(label: 'Partner', user: ': Nicholas Peloeahae'),
+                                RichTxt(label: 'Anniversary', user: ': 30 December')
+                              ],
+                            ),
+                          ),
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
           ),
-        ],
-      ),
-    );
+        );
   }
 }
 
@@ -60,15 +96,16 @@ class RichTxt extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return RichText(
-      text: TextSpan(
-        text: '${label}:',
-        style: TextStyle(color: Colors.white, letterSpacing: 1),
-        children:  <TextSpan>[
-          TextSpan(text: '\n', style: TextStyle(color: Colors.transparent)),
-          TextSpan(text: '$user', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 16)),
-        ],
-      ),
+    return Row(
+      // mainAxisAlignment: MainAxisAlignment.spaceBetween,
+      children: <Widget>[
+        Expanded(
+          flex: 1,
+            child: Text(label, style: const TextStyle(color: Colors.white),)),
+        Expanded(
+          flex: 2,
+            child: Text(user, style: const TextStyle(color: Colors.white)))
+      ]
     );
   }
 }

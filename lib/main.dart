@@ -62,7 +62,7 @@ class MyApp extends StatelessWidget {
         ),
         debugShowCheckedModeBanner: false,
         routes: {
-          '/': (context) => SignIn(),
+          '/': (context) => HomePage(),
           '/moreInfo': (context) => MoreInfo(),
           '/register': (context) => Register(),
           '/login': (context) => SignIn()
