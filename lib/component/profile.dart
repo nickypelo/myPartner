@@ -22,11 +22,7 @@ class Profile extends StatelessWidget {
               margin: const EdgeInsets.only(top: 30.0),
               decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(40.0),
-                border: Border.all(
-                  color: Colors.deepPurple,
-                  width: 2.0
-                ),
-            
+                color: Colors.black.withOpacity(0.25),
               ),
               padding: const EdgeInsets.all(12.0),
               child: Column(
@@ -41,8 +37,8 @@ class Profile extends StatelessWidget {
                           width: MediaQuery.of(context).size.width * .5,
                           height: 80,
                           child: const ListTile(
-                            title: Text('Rhulani baby girl', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0)),
-                            subtitle: Text('Surname'),
+                            title: Text('Rhulani baby girl', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
+                            subtitle: Text('Surname', style: TextStyle(color: Colors.white),),
                             ),
                           ),
                       ),
