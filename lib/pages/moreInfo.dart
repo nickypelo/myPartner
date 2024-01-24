@@ -45,24 +45,24 @@ class _MoreInfoState extends State<MoreInfo> {
       floatingActionButton:
       formChecker != 'about' && formChecker != 'highlight' && formChecker != 'myMusic'
       ? FloatingActionButton(
-        child: Text('Add'),
+        child: const Text('Add'),
         onPressed: (){
           _showAddPanel();
         },
       )
       : null,
       appBar: AppBar(
-        title: Text(data['title'], style: TextStyle(color: Colors.white),),
+        title: Text(data['title'], style: const TextStyle(color: Colors.white),),
         centerTitle: true,
         backgroundColor: Colors.deepPurple,
-        iconTheme: IconThemeData(color: Colors.white,),
+        iconTheme: const IconThemeData(color: Colors.white,),
       ),
       body: SingleChildScrollView(
         child: Container(
-          padding: EdgeInsets.all(16.0),
+          padding: const EdgeInsets.all(16.0),
           width: MediaQuery.of(context).size.width,
           height: MediaQuery.of(context).size.height,
-          margin: EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
           decoration: BoxDecoration(
             border: Border.all(width: 2.0, color: Colors.black),
             borderRadius: BorderRadius.circular(12.0)
@@ -72,7 +72,7 @@ class _MoreInfoState extends State<MoreInfo> {
                data['description'] is String
                   ? Text(
                 data['description'],
-                style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
+                style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold),
               )
                   : data['description'] is List<FoodModel>
                   ? FoodTable(foodList: data['description'] as List<FoodModel>) // Cast to List<FoodModel>
@@ -82,24 +82,18 @@ class _MoreInfoState extends State<MoreInfo> {
                   ? ListView.builder(
                       itemCount: data['description'].length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => ListTile(
-                        title: Text(data['description'][index].ladyInterest.toString()), // Wrap title in Text
-                      ),
+                      itemBuilder: (context, index) => Text(data['description'][index].ladyInterest.toString(), style: const TextStyle(fontSize: 16.0),), // Wrap title in Text
                     )
                   : data['description'] is List<HighlightModel>
                   ? ListView.builder(
                       itemCount: data['description'].length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => ListTile(
-                        title: Text(data['description'][index].ladyHighlight.toString()), // Wrap title in Text
-                      ),
+                      itemBuilder: (context, index) => Text(data['description'][index].ladyHighlight.toString(), style: const TextStyle(fontSize: 16.0),)
                     )
                   : ListView.builder(
                      itemCount: data['description'].length,
                      shrinkWrap: true,
-                     itemBuilder: (context, index) => ListTile(
-                       title: Text(data['description'][index].ladyPersonalityDescription.toString()), // Wrap title in Text
-                     ),
+                     itemBuilder: (context, index) => Text(data['description'][index].ladyPersonalityDescription.toString(), style: const TextStyle(fontSize: 16.0),), // Wrap title in Text
                    ),
                 ],
           ),
