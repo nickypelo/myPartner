@@ -12,7 +12,7 @@ import 'package:girlfriend_translator/features/information/presentation/widgets/
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/food.dart';
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/hightlight.dart';
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/interests.dart';
-import '../../../authentication/domain/repository/auth_service.dart';
+import '../../../authentication/data/repository/auth_service.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -50,28 +50,8 @@ class _HomePageState extends State<HomePage> {
                   const SizedBox(height: 8.0,),
                   const Profile(),
                   const SizedBox(height: 25.0,),
-                   Row(
-                     children: [
-                       Expanded(
-                         flex: 1,
-                           child: Padding(
-                             padding: const EdgeInsets.only(left: 20.0),
-                             child: RichText(
-                               text: const TextSpan(
-                                 text: 'HOW DO', style: TextStyle(fontWeight: FontWeight.bold, color: Colors.white),
-                                 children: [
-                                   TextSpan(text: '\nYOU', style: TextStyle(letterSpacing: 2,fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0)),
-                                   TextSpan(text: '\nFEEL',style: TextStyle(letterSpacing: 1.5,fontWeight: FontWeight.bold, color: Colors.white, fontSize: 20.0))
-                                 ]
-                               ),
-                             ),
-                           ),
-                       ),
-                       const Expanded(
-                         flex: 4,
-                           child: Mood())
-                     ],
-                   ),
+                  const Mood(),
+                  const SizedBox(height: 15.0,),
                   Accordion(
                     children: [
                       AccordionSection(

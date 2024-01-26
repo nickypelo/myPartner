@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 import '../../../../core/shared/loading.dart';
-import '../../domain/repository/auth_service.dart';
+import '../../data/repository/auth_service.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -22,6 +22,7 @@ class _RegisterState extends State<Register> {
   String email = '';
   String pwd = '';
   String error = '';
+
 
   @override
   Widget build(BuildContext context) {
@@ -44,14 +45,29 @@ class _RegisterState extends State<Register> {
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    const Text('Register Your Account.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
-
+                    const Text('REGISTER.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w900, color: Colors.purple),),
                     const SizedBox(height: 50.0,),
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: 'Full Names:',
+                        hintText: 'First Name:',
                         filled: true,
                         fillColor: Colors.purple[50]
+                      ),
+                      validator: (value){
+                        return value!.isEmpty ? 'Cannot be empty.' : null;
+                      },
+                      onChanged: (value){
+                        setState(() {
+                          _fullName = value;
+                        });
+                      },
+                    ),
+                    const SizedBox(height: 10.0,),
+                    TextFormField(
+                      decoration: InputDecoration(
+                          hintText: 'Last Name:',
+                          filled: true,
+                          fillColor: Colors.purple[50]
                       ),
                       validator: (value){
                         return value!.isEmpty ? 'Cannot be empty.' : null;
@@ -79,7 +95,7 @@ class _RegisterState extends State<Register> {
                     const SizedBox(height: 10.0,),
                     TextFormField(
                       decoration: InputDecoration(
-                        hintText: "Your Lady's full Names:",
+                        hintText: "Your Lady's email:",
                         filled: true,
                         fillColor: Colors.purple[50],
                       ),

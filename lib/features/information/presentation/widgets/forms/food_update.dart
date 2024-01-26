@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:girlfriend_translator/features/information/data/models/food_model.dart';
 import 'package:girlfriend_translator/features/information/data/repository/food_repo.dart';
+import 'package:girlfriend_translator/features/information/domain/entities/food_entity.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../authentication/data/models/user.dart';
@@ -46,7 +48,8 @@ class _FoodUpdateState extends State<FoodUpdate> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState!.validate()){
-                        await FoodRepo(uid: user.uid).createFoodData(_ladyFoodPlace, _ladyFoodItem1, _ladyFoodItem2);
+                        FoodEntity item = FoodEntity(foodID: user.uid, ladyFoodPlace: _ladyFoodPlace, ladyFoodItem1: _ladyFoodItem1, ladyFoodItem2: _ladyFoodItem2);
+                        await FoodRepo(uid: user.uid).createFoodData(item);
                         print('Food added');
                         Navigator.pop(context);
                       }

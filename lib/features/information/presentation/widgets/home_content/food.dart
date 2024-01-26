@@ -19,6 +19,9 @@ class _FoodState extends State<Food> {
     List<FoodModel> foodDisplay;
 
     food.length > 3 ? foodDisplay=food.where((item) => food.indexOf(item)<3).toList() : foodDisplay= food.toList();
+
+    final food2 = [FoodModel(foodID: '1', ladyFoodPlace: 'Rhulani', ladyFoodItem1: 'Pussy', ladyFoodItem2: 'Titties')];
+
     return Column(
       children: <Widget>[
         DataTable(
@@ -47,7 +50,7 @@ class _FoodState extends State<Food> {
                 onPressed: (){
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'Food',
-                    'description': food,
+                    'description': food2,
                     'name': 'food'
                   });
                 },

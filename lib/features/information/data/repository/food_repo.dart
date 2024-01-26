@@ -1,7 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:girlfriend_translator/features/information/data/models/food_model.dart';
+import 'package:girlfriend_translator/features/information/domain/entities/food_entity.dart';
+import 'package:girlfriend_translator/features/information/domain/repository/food_repo.dart';
 
-class FoodRepo{
+class FoodRepo extends FoodRepository{
 
   final String? uid;
   FoodRepo({required this.uid});
@@ -10,23 +12,14 @@ class FoodRepo{
   final CollectionReference foodCollection = FirebaseFirestore.instance.collection('food');
 
   // create
-  Future createFoodData(String ladyFoodPlace, String ladyFoodItem1, String ladyFoodItem2) async{
-    return await foodCollection.add({
-      'foodId': uid,
-      'ladyFoodPlace': ladyFoodPlace,
-      'ladyFoodItem1': ladyFoodItem1,
-      'ladyFoodItem2': ladyFoodItem2
-    });
+  @override
+  Future createFoodData(FoodEntity delicacy) async{
+    return await foodCollection.add(delicacy.sendFood());
   }
 
   // update
-  Future updateFoodData(String ladyFoodPlace, String ladyFoodItem1, String ladyFoodItem2 ) async{
-    return await foodCollection.doc(uid).set({
-      'foodId': uid,
-      'ladyFoodPlace': ladyFoodPlace,
-      'ladyFoodItem1': ladyFoodItem1,
-      'ladyFoodItem2': ladyFoodItem2
-    });
+  Future updateFoodData(FoodEntity delicacy) async{
+    return await foodCollection.doc(delicacy.foodID).set(delicacy.sendFood());
   }
 
   // create food list from snapshot
@@ -42,6 +35,12 @@ class FoodRepo{
   // get Food stream
   Stream<List<FoodModel>>? get food{
     return foodCollection.snapshots().map(_foodList);
+  }
+
+  @override
+  Future<List<FoodEntity>> getFoodList() {
+    // TODO: implement getFoodList
+    throw UnimplementedError();
   }
 
 }

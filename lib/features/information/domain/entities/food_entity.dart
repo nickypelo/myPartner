@@ -1,10 +1,10 @@
-class FoodModel{
+class FoodEntity{
   String? foodID;
   String? ladyFoodPlace;
   String? ladyFoodItem1;
   String? ladyFoodItem2;
 
-  FoodModel({this.foodID, this.ladyFoodItem1, this.ladyFoodItem2, this.ladyFoodPlace});
+  FoodEntity({this.foodID, this.ladyFoodItem1, this.ladyFoodItem2, this.ladyFoodPlace});
 
   Map<String, dynamic> sendFood() {
     return {

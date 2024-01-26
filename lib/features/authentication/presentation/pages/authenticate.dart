@@ -19,6 +19,6 @@
 //   }
 //   @override
 //   Widget build(BuildContext context) {
-//     return showSignIn ? SignIn(toggleView: toggleView) : Register(toggleView: toggleView);
+//     return showSignIn ? SignIn() : Register(toggleView: toggleView);
 //   }
 // }

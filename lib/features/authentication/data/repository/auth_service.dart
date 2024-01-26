@@ -2,7 +2,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:girlfriend_translator/features/authentication/data/models/user.dart';
 
 
-class AuthService{
+class AuthService {
   final FirebaseAuth _auth = FirebaseAuth.instance;
 
   // create user object based on firebase user

@@ -2,7 +2,7 @@ import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/core/shared/loading.dart';
 
-import '../../domain/repository/auth_service.dart';
+import '../../data/repository/auth_service.dart';
 
 class SignIn extends StatefulWidget {
   const SignIn({super.key});
