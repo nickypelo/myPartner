@@ -1,3 +1,7 @@
+import 'package:girlfriend_translator/features/authentication/data/models/relationship_model.dart';
+import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
+import 'package:girlfriend_translator/features/authentication/data/repository/relationship_repo_impl.dart';
+import 'package:girlfriend_translator/features/authentication/data/repository/user_details_epo_impl.dart';
 import 'package:provider/provider.dart';
 
 import '../../features/authentication/data/models/user.dart';
@@ -23,4 +27,6 @@ final appProviders = [
   StreamProvider<List<LadyModel>>.value(value: LadyRepo(uid: '').lady, initialData: const []),
   StreamProvider<List<MusicModel>>.value(value: MusicRepo(uid: '').music, initialData: const []),
   StreamProvider<List<PersonalityModel>>.value(value: PersonalityRepo(uid: '').personality, initialData: const []),
+  StreamProvider<List<UserDetailsModel>>.value(value: UserDetailsRepoImpl().userDetails, initialData: const []),
+  StreamProvider<List<RelationshipModel>>.value(value: RelationshipRepoImpl().couples, initialData: const []),
 ];

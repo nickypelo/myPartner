@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/models/food_model.dart';
 import 'package:girlfriend_translator/features/information/data/repository/food_repo.dart';
 import 'package:girlfriend_translator/features/information/domain/entities/food_entity.dart';
 import 'package:provider/provider.dart';

@@ -2,14 +2,25 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import '../../../authentication/data/models/user.dart';
+import '../../../authentication/data/repository/auth_service.dart';
 import '../../data/models/food_model.dart';
 import '../../data/models/highlight_model.dart';
 import '../../data/models/interest_model.dart';
 import '../../data/models/music_model.dart';
 import '../../data/models/personality_model.dart';
 
-class GuyHome extends StatelessWidget {
+class GuyHome extends StatefulWidget {
   const GuyHome({super.key});
+
+  static final AuthService _auth = AuthService();
+
+
+  @override
+  State<GuyHome> createState() => _GuyHomeState();
+}
+
+class _GuyHomeState extends State<GuyHome> {
+
 
   @override
   Widget build(BuildContext context) {
@@ -26,6 +37,7 @@ class GuyHome extends StatelessWidget {
     final interest = Provider.of<List<InterestModel>>(context);
     final personality = Provider.of<List<PersonalityModel>>(context);
 
+
     // list my data for presentation
     List<FoodModel> foodDisplay = food.where((item) => item.foodID == user || item.foodID == she.uid).toList();
     List<PersonalityModel> personalityDisplay = personality.where((item) => item.personalityID == user || item.personalityID == she.uid).toList();
@@ -35,6 +47,13 @@ class GuyHome extends StatelessWidget {
 
 
     return Scaffold(
+      floatingActionButton: FloatingActionButton(
+          backgroundColor: Colors.deepPurple,
+          child: const Text('logout', style: TextStyle(color: Colors.white),),
+          onPressed: () async{
+            await GuyHome._auth.logoff();
+          }
+      ),
       body: SafeArea(
         child: Column(
           children: [
@@ -63,7 +82,7 @@ class GuyHome extends StatelessWidget {
                 ],
               ),
             ),
-        
+
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 12.0),
               height: screenHeight * 0.25,

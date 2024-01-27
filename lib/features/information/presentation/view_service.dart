@@ -1,6 +1,5 @@
 // Functions for buttons and gestures
 import 'package:flutter/cupertino.dart';
-import 'package:flutter/src/widgets/navigator.dart';
 
 
 class ButtonActions{
