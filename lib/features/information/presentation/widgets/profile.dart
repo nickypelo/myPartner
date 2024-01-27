@@ -1,13 +1,25 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
+import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
+import 'package:girlfriend_translator/features/information/data/models/lady_model.dart';
+import 'package:provider/provider.dart';
 
 
 class Profile extends StatelessWidget {
-  const Profile({super.key});
+  const Profile({super.key, required this.myLady, required this.myDude});
+
+  final UserDetailsModel myLady;
+  final UserDetailsModel myDude;
 
   @override
   Widget build(BuildContext context) {
+    // access data
+    final ladyDetails = Provider.of<List<LadyModel>>(context);
+    LadyModel ladyDisplay;
+
+    int specific = ladyDetails.indexWhere((element) => element.userID == myDude.userID);
+    ladyDisplay = ladyDetails[specific];
 
     //sizes
     double breadth = MediaQuery.of(context).size.width;
@@ -32,9 +44,9 @@ class Profile extends StatelessWidget {
                       padding: const EdgeInsets.fromLTRB(4, 12, 0, 0),
                       width: MediaQuery.of(context).size.width * .5,
                       height: 80,
-                      child: const ListTile(
-                        title: Text('Rhulani baby girl', style: TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
-                        subtitle: Text('Surname', style: TextStyle(color: Colors.white),),
+                      child:  ListTile(
+                        title: Text(myLady.firstname.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
+                        subtitle: Text(myLady.lastname.toString(), style:  const TextStyle(color: Colors.white),),
                         ),
                       ),
                   ),
@@ -55,17 +67,17 @@ class Profile extends StatelessWidget {
                   child: SizedBox(
                     width: breadth,
                     height: screenHeight * .15,
-                    child: const Card(
+                    child:  Card(
                       color: Colors.transparent,
                       child: Padding(
-                        padding:  EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
+                        padding:  const EdgeInsets.symmetric(vertical: 8.0, horizontal: 16.0),
                         child: Column(
                           crossAxisAlignment: CrossAxisAlignment.start,
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            RichTxt(label: 'Birthday', user: ': 1 April'),
-                            RichTxt(label: 'Partner', user: ': Nicholas Peloeahae'),
-                            RichTxt(label: 'Anniversary', user: ': 30 December')
+                            RichTxt(label: 'Birthday', user: ladyDisplay.ladyBirthDate.toString()),
+                            RichTxt(label: 'Partner', user: ('${myDude.firstname} ${myDude.lastname}')),
+                            RichTxt(label: 'Anniversary', user: ladyDisplay.anniversaryDate.toString())
                           ],
                         ),
                       ),
@@ -94,7 +106,7 @@ class RichTxt extends StatelessWidget {
             child: Text(label, style: const TextStyle(color: Colors.white),)),
         Expanded(
           flex: 2,
-            child: Text(user, style: const TextStyle(color: Colors.white)))
+            child: Text(': $user', style: const TextStyle(color: Colors.white)))
       ]
     );
   }

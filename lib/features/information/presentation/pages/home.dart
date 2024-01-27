@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //3rd party packages
 import 'package:accordion/accordion.dart';
+import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/mood.dart';
 
 // local imports
@@ -12,11 +13,14 @@ import 'package:girlfriend_translator/features/information/presentation/widgets/
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/food.dart';
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/hightlight.dart';
 import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/interests.dart';
+import 'package:provider/provider.dart';
+import '../../../authentication/data/models/relationship_model.dart';
+import '../../../authentication/data/models/user.dart';
 import '../../../authentication/data/repository/auth_service.dart';
 
 
 class HomePage extends StatefulWidget {
-  const HomePage({super.key});
+   const HomePage({super.key});
 
   static final AuthService _auth = AuthService();
 
@@ -25,8 +29,41 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
+
+  // final String name = ;
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AppUser?>(context);
+    final userDetails = Provider.of<List<UserDetailsModel>>(context);
+    final couple = Provider.of<List<RelationshipModel>>(context);
+
+    bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
+    bool isBoyfriend = false;
+    // my partner details
+    int partnerIndex = 0;
+
+    // current user index
+    int index = isUser ? userDetails.indexWhere((element) => element.userID == user?.uid) : -1;
+
+    if(isUser){
+      // boyfriend/girlfriend login
+      isBoyfriend = (couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail)) != -1;
+
+      // partner info
+      int indexCouple = isBoyfriend ?
+      couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail) :
+      couple.indexWhere((element) => element.boyfriend == userDetails[index].partnerEmail);
+
+
+      if(isBoyfriend){
+        partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].boyfriend);
+      }
+      else{
+        partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].girlfriend);
+      }
+
+    }
 
     return Scaffold(
         backgroundColor: const Color(0xFF7169B4),
@@ -48,7 +85,7 @@ class _HomePageState extends State<HomePage> {
               child: Column(
                 children: <Widget>[
                   const SizedBox(height: 8.0,),
-                  const Profile(),
+                  Profile(myLady: userDetails[index], myDude: userDetails[partnerIndex]),
                   const SizedBox(height: 25.0,),
                   const Mood(),
                   const SizedBox(height: 15.0,),
