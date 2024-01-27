@@ -4,21 +4,16 @@ import 'package:provider/provider.dart';
 
 import '../../../data/models/music_model.dart';
 
-class Music extends StatefulWidget {
-  const Music({super.key});
+class Music extends StatelessWidget {
+  const Music({super.key, required this.music});
 
-  @override
-  State<Music> createState() => _MusicState();
-}
-
-class _MusicState extends State<Music> {
+  final List<MusicModel> music;
   @override
   Widget build(BuildContext context) {
-    // access music data
-    final music = Provider.of<List<MusicModel>>(context);
 
-    final musicRecommended = music.where((item) => item.musicWho == 'nicholas').toList();
-    final musicHers = music.where((item) => item.musicWho == 'rhulani').toList();
+    final musicRecommended = music.where((item) => item.musicWho == 'guy').toList();
+    final musicHers = music.where((item) => item.musicWho == 'lady').toList();
+
     return Accordion(
         children: [
           AccordionSection(

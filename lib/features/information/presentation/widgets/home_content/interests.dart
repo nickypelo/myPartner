@@ -1,28 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/features/information/data/models/interest_model.dart';
-import 'package:provider/provider.dart';
 
-class Interests extends StatefulWidget {
-  const Interests({super.key});
+class Interests extends StatelessWidget {
+  const Interests({super.key, required this.interest});
 
-  @override
-  State<Interests> createState() => _InterestsState();
-}
+  final List<InterestModel> interest;
 
-class _InterestsState extends State<Interests> {
   @override
   Widget build(BuildContext context) {
-
-    // access food data
-    final interest = Provider.of<List<InterestModel>>(context);
     List<InterestModel> interestDisplay;
-
     interest.length > 4 ? interestDisplay=interest.where((item) => interest.indexOf(item)<4).toList() : interestDisplay= interest.toList();
 
     return Column(
       children: <Widget>[
         ListView.builder(
-          itemCount: 4,
+          itemCount: interestDisplay.length,
           shrinkWrap: true,
           itemBuilder: (context, index){
             return ListTile(

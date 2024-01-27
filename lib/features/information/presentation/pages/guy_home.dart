@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import '../../../authentication/data/models/relationship_model.dart';
 import '../../../authentication/data/models/user.dart';
+import '../../../authentication/data/models/user_details.dart';
 import '../../../authentication/data/repository/auth_service.dart';
 import '../../data/models/food_model.dart';
 import '../../data/models/highlight_model.dart';
@@ -24,14 +26,46 @@ class _GuyHomeState extends State<GuyHome> {
 
   @override
   Widget build(BuildContext context) {
+    final user = Provider.of<AppUser?>(context);
+    final userDetails = Provider.of<List<UserDetailsModel>>(context);
+    final couple = Provider.of<List<RelationshipModel>>(context);
+
+    bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
+    bool isBoyfriend = false;
+    // current user index
+    int index = 0;
+    // my partner index
+    int partnerIndex = 0;
+
+    if(isUser){
+      // current user index
+      index = userDetails.indexWhere((element) => element.userID == user?.uid);
+      // boyfriend/girlfriend login
+      isBoyfriend = (couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail)) != -1;
+
+      // partner info
+      int indexCouple = isBoyfriend ?
+      couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail) :
+      couple.indexWhere((element) => element.boyfriend == userDetails[index].partnerEmail);
+
+
+      if(isBoyfriend){
+        partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].boyfriend);
+      }
+      else{
+        partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].girlfriend);
+      }
+    }
+
+    UserDetailsModel current = userDetails[index];
+    UserDetailsModel myLady =  userDetails[partnerIndex];
+
     // sizes
     double breadth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
-    String user = '8P55rpYTbvWjKPOiVaoCypiZXor1';
 
     // call my data
     final food = Provider.of<List<FoodModel>>(context);
-    final she = Provider.of<AppUser>(context);
     final music = Provider.of<List<MusicModel>>(context);
     final highlight = Provider.of<List<HighlightModel>>(context);
     final interest = Provider.of<List<InterestModel>>(context);
@@ -39,12 +73,14 @@ class _GuyHomeState extends State<GuyHome> {
 
 
     // list my data for presentation
-    List<FoodModel> foodDisplay = food.where((item) => item.foodID == user || item.foodID == she.uid).toList();
-    List<PersonalityModel> personalityDisplay = personality.where((item) => item.personalityID == user || item.personalityID == she.uid).toList();
-    List<MusicModel> musicDisplay = music.where((item) => item.musicID == user || item.musicID == she.uid).toList();
-    List<HighlightModel> highlightDisplay = highlight.where((item) => item.highlightID == user || item.highlightID == she.uid).toList();
-    List<InterestModel> interestDisplay = interest.where((item) => item.interestID == user || item.interestID == she.uid).toList();
+    List<FoodModel> foodDisplay = food.where((item) => item.foodID == current.userID || item.foodID == myLady.userID).toList();
+    List<PersonalityModel> personalityDisplay = personality.where((item) => item.personalityID == current.userID || item.personalityID == myLady.userID).toList();
+    List<MusicModel> musicDisplay = music.where((item) => item.musicID == current.userID || item.musicID == myLady.userID).toList();
+    List<HighlightModel> highlightDisplay = highlight.where((item) => item.highlightID == current.userID || item.highlightID == myLady.userID).toList();
+    List<InterestModel> interestDisplay = interest.where((item) => item.interestID == current.userID || item.interestID == myLady.userID).toList();
 
+    print(current.firstname);
+    print(myLady.firstname);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(

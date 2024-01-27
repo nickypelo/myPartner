@@ -1,26 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/features/information/data/models/food_model.dart';
-import 'package:provider/provider.dart';
 
-class Food extends StatefulWidget {
-  const Food({super.key});
+class Food extends StatelessWidget {
+  const Food({super.key, required this.food});
 
-  @override
-  State<Food> createState() => _FoodState();
-}
-
-class _FoodState extends State<Food> {
+  final List<FoodModel> food;
   @override
   Widget build(BuildContext context) {
-    // final List<FoodModel> empty = [FoodModel(foodID: '1', ladyFoodPlace: '', ladyFoodItem1: '', ladyFoodItem2: '')];
-
     // access food data
-    final food = Provider.of<List<FoodModel>>(context);
     List<FoodModel> foodDisplay;
-
     food.length > 3 ? foodDisplay=food.where((item) => food.indexOf(item)<3).toList() : foodDisplay= food.toList();
-
-    final food2 = [FoodModel(foodID: '1', ladyFoodPlace: 'Rhulani', ladyFoodItem1: 'Pussy', ladyFoodItem2: 'Titties')];
 
     return Column(
       children: <Widget>[
@@ -50,7 +39,7 @@ class _FoodState extends State<Food> {
                 onPressed: (){
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'Food',
-                    'description': food2,
+                    'description': food,
                     'name': 'food'
                   });
                 },

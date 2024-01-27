@@ -89,7 +89,7 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
               ),
-        
+              SizedBox(height: space * .4,),
               Column(
                 children: [
                   ElevatedButton(
@@ -122,7 +122,8 @@ class _SignInState extends State<SignIn> {
                               recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/register'))
                         ]
                     ),
-                  )
+                  ),
+                  const SizedBox(height: 50.0,),
                 ],
               ),
         

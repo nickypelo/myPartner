@@ -17,6 +17,11 @@ import 'package:provider/provider.dart';
 import '../../../authentication/data/models/relationship_model.dart';
 import '../../../authentication/data/models/user.dart';
 import '../../../authentication/data/repository/auth_service.dart';
+import '../../data/models/food_model.dart';
+import '../../data/models/highlight_model.dart';
+import '../../data/models/interest_model.dart';
+import '../../data/models/music_model.dart';
+import '../../data/models/personality_model.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -40,13 +45,14 @@ class _HomePageState extends State<HomePage> {
 
     bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
     bool isBoyfriend = false;
-    // my partner details
+    // current user index
+    int index = 0;
+    // my partner index
     int partnerIndex = 0;
 
-    // current user index
-    int index = isUser ? userDetails.indexWhere((element) => element.userID == user?.uid) : -1;
-
     if(isUser){
+      // current user index
+      index = userDetails.indexWhere((element) => element.userID == user?.uid);
       // boyfriend/girlfriend login
       isBoyfriend = (couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail)) != -1;
 
@@ -62,8 +68,25 @@ class _HomePageState extends State<HomePage> {
       else{
         partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].girlfriend);
       }
-
     }
+
+    // call my data
+    final food = Provider.of<List<FoodModel>>(context);
+    final music = Provider.of<List<MusicModel>>(context);
+    final highlight = Provider.of<List<HighlightModel>>(context);
+    final interest = Provider.of<List<InterestModel>>(context);
+    final personality = Provider.of<List<PersonalityModel>>(context);
+
+    UserDetailsModel current = userDetails[index];
+    UserDetailsModel myLady =  userDetails[partnerIndex];
+
+    // list my data for presentation
+    List<FoodModel> foodDisplay = food.where((item) => item.foodID == current.userID || item.foodID == myLady.userID).toList();
+    List<PersonalityModel> personalityDisplay = personality.where((item) => item.personalityID == current.userID || item.personalityID == myLady.userID).toList();
+    List<MusicModel> musicDisplay = music.where((item) => item.musicID == current.userID || item.musicID == myLady.userID).toList();
+    List<HighlightModel> highlightDisplay = highlight.where((item) => item.highlightID == current.userID || item.highlightID == myLady.userID).toList();
+    List<InterestModel> interestDisplay = interest.where((item) => item.interestID == current.userID || item.interestID == myLady.userID).toList();
+
 
     return Scaffold(
         backgroundColor: const Color(0xFF7169B4),
@@ -108,7 +131,7 @@ class _HomePageState extends State<HomePage> {
                           headerPadding: const EdgeInsets.all(8.0),
                           leftIcon: Image.asset('assets/persona.png'),
                           header: const Header(heading: 'Personality',),
-                          content: const Personality()
+                          content: Personality(personality: personalityDisplay.isEmpty ? [PersonalityModel(ladyPersonalityDescription: '', personalityID: '0')] : personalityDisplay,)
                       ),
                       AccordionSection(
                           headerBackgroundColor: Colors.deepPurple,
@@ -117,7 +140,7 @@ class _HomePageState extends State<HomePage> {
                           headerBorderRadius: 0,
                           leftIcon: Image.asset('assets/interest.png'),
                           header: const Header(heading: 'Interests'),
-                          content: const Interests()
+                          content: Interests(interest: interestDisplay.isEmpty ? [InterestModel(interestID: '', ladyInterest: '')] : interestDisplay,)
                       ),
                       AccordionSection(
                           headerBackgroundColor: Colors.green[700],
@@ -126,7 +149,7 @@ class _HomePageState extends State<HomePage> {
                           headerPadding: const EdgeInsets.all(8.0),
                           leftIcon: Image.asset('assets/foody.png'),
                           header: const Header(heading: 'Food',),
-                          content: const Food()
+                          content: Food(food: foodDisplay.isEmpty ? [FoodModel(foodID: '1', ladyFoodItem1: '', ladyFoodItem2: '', ladyFoodPlace: '')] : foodDisplay,)
                       ),
                       AccordionSection(
                           headerBackgroundColor: Colors.deepPurple,
@@ -135,7 +158,7 @@ class _HomePageState extends State<HomePage> {
                           headerBorderRadius: 0,
                           leftIcon: Image.asset('assets/music.png'),
                           header: const Header(heading: 'Music'),
-                          content: const Music()
+                          content: Music(music: musicDisplay.isEmpty ? [MusicModel(musicArtist: '', musicID: '', musicSongName: '', musicWho: '')] : musicDisplay,)
                       ),
                       AccordionSection(
                           headerBackgroundColor: Colors.green[700],
@@ -144,7 +167,7 @@ class _HomePageState extends State<HomePage> {
                           headerBorderRadius: 0,
                           leftIcon: Image.asset('assets/freak.png'),
                           header: const Header(heading: 'What I like About You',),
-                          content: const Highlights()
+                          content: Highlights(highlight: highlightDisplay.isEmpty ? [HighlightModel(highlightID: '', ladyHighlight: '')] : highlightDisplay,)
                       ),
                     ],
                   ),

@@ -1,29 +1,21 @@
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
 
 import '../../../data/models/highlight_model.dart';
 
-class Highlights extends StatefulWidget {
-  const Highlights({super.key});
+class Highlights extends StatelessWidget {
+  const Highlights({super.key, required this.highlight});
 
-  @override
-  State<Highlights> createState() => _HighlightsState();
-}
-
-class _HighlightsState extends State<Highlights> {
+  final List<HighlightModel> highlight;
   @override
   Widget build(BuildContext context) {
-    // access highlight data
-    final highlight = Provider.of<List<HighlightModel>>(context);
     List<HighlightModel> highlightDisplay;
-
     highlight.length > 4 ? highlightDisplay=highlight.where((item) => highlight.indexOf(item)<4).toList() : highlightDisplay= highlight.toList();
 
     return Column(
       children: <Widget>[
         ListView.builder(
           shrinkWrap: true,
-          itemCount: 4,
+          itemCount: highlightDisplay.length,
             itemBuilder: (context, index){
             return ListTile(
                 title: Text(highlightDisplay[index].ladyHighlight.toString(), style: const TextStyle(fontSize: 14),));

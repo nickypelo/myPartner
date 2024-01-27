@@ -2,24 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/features/information/data/models/personality_model.dart';
 import 'package:provider/provider.dart';
 
-class Personality extends StatefulWidget {
-  const Personality({super.key});
+class Personality extends StatelessWidget {
+  const Personality({super.key, required this.personality});
 
-  @override
-  State<Personality> createState() => _PersonalityState();
-}
-
-class _PersonalityState extends State<Personality> {
+  final List<PersonalityModel> personality;
   final String title = "What I see.";
 
   @override
   Widget build(BuildContext context) {
-    // access personality data
-    // final personality = Provider.of<List<PersonalityModel>>(context)[0];
-    // final description  = personality.ladyPersonalityDescription;
-
-    // access personality data
-    final personality = Provider.of<List<PersonalityModel>>(context);
     List<PersonalityModel> personalityDisplay;
 
     personality.length > 1 ? personalityDisplay=personality.where((item) => personality.indexOf(item)<4).toList() : personalityDisplay= personality.toList();

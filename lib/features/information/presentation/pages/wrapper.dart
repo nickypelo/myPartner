@@ -23,10 +23,10 @@ class Wrapper extends StatelessWidget {
     bool isBoyfriend = false;
     // my partner details
 
-    // current user index
-    int index = isUser ? userDetails.indexWhere((element) => element.userID == user?.uid) : -1;
-
     if(isUser){
+      // current user index
+      int index = userDetails.indexWhere((element) => element.userID == user?.uid);
+
       // boyfriend/girlfriend login
       isBoyfriend = (couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail)) != -1;
     }
