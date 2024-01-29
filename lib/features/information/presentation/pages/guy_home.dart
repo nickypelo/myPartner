@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:girlfriend_translator/features/information/presentation/provider/notification_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../authentication/data/models/relationship_model.dart';
@@ -70,6 +71,8 @@ class _GuyHomeState extends State<GuyHome> {
     final highlight = Provider.of<List<HighlightModel>>(context);
     final interest = Provider.of<List<InterestModel>>(context);
     final personality = Provider.of<List<PersonalityModel>>(context);
+    // messages
+    final messageProvider = Provider.of<MessageProvider>(context);
 
 
     // list my data for presentation
@@ -79,8 +82,9 @@ class _GuyHomeState extends State<GuyHome> {
     List<HighlightModel> highlightDisplay = highlight.where((item) => item.highlightID == current.userID || item.highlightID == myLady.userID).toList();
     List<InterestModel> interestDisplay = interest.where((item) => item.interestID == current.userID || item.interestID == myLady.userID).toList();
 
-    print(current.firstname);
-    print(myLady.firstname);
+
+    // print(current.firstname);
+    // print(myLady.firstname);
 
     return Scaffold(
       floatingActionButton: FloatingActionButton(
@@ -113,7 +117,7 @@ class _GuyHomeState extends State<GuyHome> {
                     ],
                   ),
                   const SizedBox(height: 20.0,),
-                  const Text('Welcome Broski', style: TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),),
+                  Text('Welcome ${current.firstname.toString()}', style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),),
                   const Text('What do you have in store for your lady?')
                 ],
               ),
@@ -229,11 +233,19 @@ class _GuyHomeState extends State<GuyHome> {
                   ),
                   const SizedBox(width: 10.0,),
                   Expanded(
-                      child: Container(
-                        padding: const EdgeInsets.all(8.0),
-                          height: screenHeight * 0.3,
-                          color: Colors.deepOrange,
-                          child: const Center(child: Text('MOOD SUGGESTIONS', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold))))
+                      child: GestureDetector(
+                        onTap: (){
+                          // NotificationService().sendNotification(1, "${myLady.firstname.toString()}'s mood", '${current.firstname}, ${messageProvider.message}');
+                          Navigator.pushNamed(context, '/moodInfo', arguments: {
+                            'moodAttribute': messageProvider.message
+                          });
+                        },
+                        child: Container(
+                          padding: const EdgeInsets.all(8.0),
+                            height: screenHeight * 0.3,
+                            color: Colors.deepOrange,
+                            child:  Center(child: Text('MOOD SUGGESTIONS ${messageProvider.message}', style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)))),
+                      )
                   ),
                 ],
               ),

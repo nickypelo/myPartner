@@ -26,7 +26,6 @@ class Highlights extends StatelessWidget {
           children: [
             TextButton(
                 onPressed: (){
-                  print('Indeed');
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'What I Like About You.',
                     'description': highlight,

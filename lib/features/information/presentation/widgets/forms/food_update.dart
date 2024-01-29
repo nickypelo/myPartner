@@ -49,7 +49,6 @@ class _FoodUpdateState extends State<FoodUpdate> {
                       if(_formKey.currentState!.validate()){
                         FoodEntity item = FoodEntity(foodID: user.uid, ladyFoodPlace: _ladyFoodPlace, ladyFoodItem1: _ladyFoodItem1, ladyFoodItem2: _ladyFoodItem2);
                         await FoodRepo(uid: user.uid).createFoodData(item);
-                        print('Food added');
                         Navigator.pop(context);
                       }
                     },

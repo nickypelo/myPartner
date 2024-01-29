@@ -1,3 +1,4 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/features/authentication/data/models/relationship_model.dart';
@@ -187,8 +188,10 @@ class _RegisterState extends State<Register> {
                                   firstname: _firstName,
                                   lastname: _lastName,
                                   role: data['role'],
-                                  partnerEmail: _partnerEmail
-                              );
+                                  partnerEmail: _partnerEmail,
+                                  fcmToken: await FirebaseMessaging.instance.getToken()
+
+                          );
                               RelationshipModel couple = RelationshipModel(
                                   boyfriend: email,
                                   girlfriend: _partnerEmail

@@ -56,16 +56,16 @@ class _MoreInfoState extends State<MoreInfo> {
         backgroundColor: Colors.deepPurple,
         iconTheme: const IconThemeData(color: Colors.white,),
       ),
-      body: SingleChildScrollView(
-        child: Container(
-          padding: const EdgeInsets.all(16.0),
-          width: MediaQuery.of(context).size.width,
-          height: MediaQuery.of(context).size.height,
-          margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
-          decoration: BoxDecoration(
-            border: Border.all(width: 2.0, color: Colors.black),
-            borderRadius: BorderRadius.circular(12.0)
-          ),
+      body: Container(
+        padding: const EdgeInsets.all(16.0),
+        width: MediaQuery.of(context).size.width,
+        height: MediaQuery.of(context).size.height,
+        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+        decoration: BoxDecoration(
+          border: Border.all(width: 2.0, color: Colors.black),
+          borderRadius: BorderRadius.circular(12.0)
+        ),
+        child: SingleChildScrollView(
           child: Column(
             children: [
                data['description'] is String

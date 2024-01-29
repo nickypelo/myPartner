@@ -4,6 +4,8 @@ class UserDetailsEntity{
   final String? lastname;
   final String? partnerEmail;
   final String? role;
+  final String? fcmToken;
+
 
   UserDetailsEntity(
       {
@@ -11,7 +13,8 @@ class UserDetailsEntity{
         this.firstname,
         this.lastname,
         this.partnerEmail,
-        this.role
+        this.role,
+        this.fcmToken
       }
     );
 
@@ -21,7 +24,8 @@ class UserDetailsEntity{
       'firstname': firstname,
       'lastname': lastname,
       'partnerEmail': partnerEmail,
-      'role': role
+      'role': role,
+      'fcmToken' : fcmToken
     };
   }
 }

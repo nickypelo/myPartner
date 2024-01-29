@@ -25,11 +25,11 @@ class Food extends StatelessWidget {
             child: Text('Item 2', style: TextStyle(fontWeight: FontWeight.bold),),
           ))
         ],
-        rows:  foodDisplay.map((eish) => DataRow(
+        rows:  foodDisplay.map((item) => DataRow(
           cells: <DataCell>[
-            DataCell(Text(eish.ladyFoodPlace.toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
-            DataCell(Text(eish.ladyFoodItem1.toString())),
-            DataCell(Text(eish.ladyFoodItem2.toString()))
+            DataCell(Text(item.ladyFoodPlace.toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
+            DataCell(Text(item.ladyFoodItem1.toString())),
+            DataCell(Text(item.ladyFoodItem2.toString()))
           ],),).toList(),
       ),
         Row(

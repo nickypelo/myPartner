@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:girlfriend_translator/features/authentication/data/models/relationship_model.dart';
 import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
+import 'package:girlfriend_translator/features/information/presentation/pages/home.dart';
 import 'package:provider/provider.dart';
 
 // local imports
 import '../../../authentication/data/models/user.dart';
 import 'greeting.dart';
 import 'guy_home.dart';
-import 'home.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});

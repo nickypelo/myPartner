@@ -43,7 +43,6 @@ class _InterestUpdateState extends State<InterestUpdate> {
                     onPressed: () async {
                       if(_formKey.currentState!.validate()){
                         await InterestRepo(uid: user.uid).createInterestData( _ladyInterest);
-                        print('Interest Updated');
                         Navigator.pop(context);
                       }
                     },

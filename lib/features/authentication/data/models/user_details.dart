@@ -6,6 +6,7 @@ class UserDetailsModel extends UserDetailsEntity{
   String? lastname;
   String? partnerEmail;
   String? role;
+  String? fcmToken;
 
   UserDetailsModel(
     {
@@ -13,14 +14,17 @@ class UserDetailsModel extends UserDetailsEntity{
       this.firstname,
       this.lastname,
       this.partnerEmail,
-      this.role
+      this.role,
+      this.fcmToken
+
     }
   ) : super(
       userID: userID,
       firstname: firstname,
       lastname: lastname,
       partnerEmail: partnerEmail,
-      role: role
+      role: role,
+      fcmToken: fcmToken
     );
 
   Map<String, dynamic> userDetailsMap(){
@@ -29,7 +33,8 @@ class UserDetailsModel extends UserDetailsEntity{
       'firstname': firstname,
       'lastname': lastname,
       'partnerEmail': partnerEmail,
-      'role': role
+      'role': role,
+      'fcmToken' : fcmToken
     };
   }
 }

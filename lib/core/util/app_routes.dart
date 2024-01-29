@@ -1,5 +1,6 @@
+
 import 'package:flutter/cupertino.dart';
-import 'package:girlfriend_translator/features/information/presentation/pages/greeting.dart';
+import 'package:girlfriend_translator/features/information/presentation/pages/mood_info.dart';
 
 import '../../features/authentication/presentation/pages/register.dart';
 import '../../features/authentication/presentation/pages/sign_in.dart';
@@ -12,4 +13,5 @@ final routes = <String, WidgetBuilder>{
   '/moreInfo': (context) => const MoreInfo(),
   '/register': (context) => const Register(),
   '/login': (context) => const SignIn(),
+  '/moodInfo': (context) => const MoodInfo()
 };

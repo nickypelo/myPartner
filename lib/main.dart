@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 
 //firebase and provider
 import 'package:firebase_core/firebase_core.dart';
+import 'package:girlfriend_translator/features/information/data/data_sources/api/local_notifications.dart';
 import 'firebase_options.dart';
 import 'package:provider/provider.dart';
 
@@ -14,6 +15,7 @@ void main() async {
   await Firebase.initializeApp(
     options: DefaultFirebaseOptions.currentPlatform,
   );
+  await NotificationService().initialNotification();
   runApp(const MyApp());
 }
 
