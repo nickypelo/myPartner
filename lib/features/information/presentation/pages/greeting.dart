@@ -36,7 +36,7 @@ class _GreetingState extends State<Greeting> {
             child: Column(
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
-                SizedBox(height: space *1.5,),
+                SizedBox(height: space,),
                 Expanded(
                   flex: 2,
                   child: Container(

@@ -31,6 +31,10 @@ class _GuyHomeState extends State<GuyHome> {
     final userDetails = Provider.of<List<UserDetailsModel>>(context);
     final couple = Provider.of<List<RelationshipModel>>(context);
 
+    // establish users
+    UserDetailsModel current = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
+    UserDetailsModel myLady = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
+
     bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
     bool isBoyfriend = false;
     // current user index
@@ -56,10 +60,12 @@ class _GuyHomeState extends State<GuyHome> {
       else{
         partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].girlfriend);
       }
+
+      current = userDetails[index];
+      myLady =  userDetails[partnerIndex];
     }
 
-    UserDetailsModel current = userDetails[index];
-    UserDetailsModel myLady =  userDetails[partnerIndex];
+
 
     // sizes
     double breadth = MediaQuery.of(context).size.width;
@@ -94,11 +100,16 @@ class _GuyHomeState extends State<GuyHome> {
             await GuyHome._auth.logoff();
           }
       ),
-      body: SafeArea(
+      appBar: AppBar(
+        actions: [
+          IconButton(onPressed: (){}, icon: const Icon(Icons.settings))
+        ],
+      ),
+      body: SingleChildScrollView(
         child: Column(
           children: [
             Container(
-              height: screenHeight * 0.4 ,
+              // height: screenHeight * 0.4 ,
               width: breadth * .95,
               padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18.0),
               child: Column(
@@ -118,11 +129,12 @@ class _GuyHomeState extends State<GuyHome> {
                   ),
                   const SizedBox(height: 20.0,),
                   Text('Welcome ${current.firstname.toString()}', style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),),
-                  const Text('What do you have in store for your lady?')
+                  const Text('What do you have in store for your lady?'),
+                  const SizedBox(height: 20.0,),
                 ],
               ),
             ),
-
+        
             Container(
               margin: const EdgeInsets.symmetric(horizontal: 12.0),
               height: screenHeight * 0.25,

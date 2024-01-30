@@ -43,6 +43,11 @@ class _HomePageState extends State<HomePage> {
     final userDetails = Provider.of<List<UserDetailsModel>>(context);
     final couple = Provider.of<List<RelationshipModel>>(context);
 
+    // establish users
+    UserDetailsModel current = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
+    UserDetailsModel myLady = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
+
+
     bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
     bool isBoyfriend = false;
     // current user index
@@ -68,6 +73,9 @@ class _HomePageState extends State<HomePage> {
       else{
         partnerIndex = userDetails.indexWhere((element) => element.partnerEmail == couple[indexCouple].girlfriend);
       }
+
+      current = userDetails[index];
+      myLady =  userDetails[partnerIndex];
     }
 
     // call my data
@@ -77,8 +85,6 @@ class _HomePageState extends State<HomePage> {
     final interest = Provider.of<List<InterestModel>>(context);
     final personality = Provider.of<List<PersonalityModel>>(context);
 
-    UserDetailsModel current = userDetails[index];
-    UserDetailsModel myLady =  userDetails[partnerIndex];
 
     // list my data for presentation
     List<FoodModel> foodDisplay = food.where((item) => item.foodID == current.userID || item.foodID == myLady.userID).toList();

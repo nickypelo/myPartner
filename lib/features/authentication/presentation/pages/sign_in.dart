@@ -107,6 +107,8 @@ class _SignInState extends State<SignIn> {
                             setState(() {
                               error = 'invalid credentials';
                               loading = false;
+                              ScaffoldMessenger.of(context).showSnackBar(
+                                  const SnackBar(content: Text('Try Again')));
                             });
                           }
                         }

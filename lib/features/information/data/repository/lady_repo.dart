@@ -9,10 +9,15 @@ class LadyRepo{
   // reference collection
   final CollectionReference ladyInfoCollection = FirebaseFirestore.instance.collection('ladyInfo');
 
+  // create
+  Future createLadyData(LadyModel she ) async{
+    return await ladyInfoCollection.add(she.sendInfo());
+  }
+
+  // update
   Future updateUserData(String ladyName, String ladyBirthDate, String anniversaryDate ) async{
     return await ladyInfoCollection.doc(uid).set({
       'userID': uid,
-      'ladyName': ladyName,
       'ladyBirthDate': ladyBirthDate,
       'anniversaryDate': anniversaryDate
     });
@@ -22,7 +27,6 @@ class LadyRepo{
   List<LadyModel> _ladyList(QuerySnapshot querySnapshot){
     return querySnapshot.docs.map<LadyModel>((doc) => LadyModel(
         userID: doc.get('userID') ?? '',
-        ladyName: doc.get('ladyName') ?? '',
         ladyBirthDate: doc.get('ladyBirthDate') ?? '',
         anniversaryDate: doc.get('anniversaryDate') ?? '',
     )).toList();
