@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/models/interest_model.dart';
+
+import '../../../data/models/interest_model.dart';
 
 class Interests extends StatelessWidget {
   const Interests({super.key, required this.interest});

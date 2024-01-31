@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:girlfriend_translator/features/information/data/models/highlight_model.dart';
+
+import '../models/highlight_model.dart';
 
 class HighlightRepo{
 

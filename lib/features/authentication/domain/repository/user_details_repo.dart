@@ -1,4 +1,5 @@
-import 'package:girlfriend_translator/features/authentication/domain/entities/user_entity.dart';
+
+import '../entities/user_entity.dart';
 
 abstract class UserDetailsRepository{
 

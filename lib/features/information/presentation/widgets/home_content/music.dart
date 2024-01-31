@@ -54,7 +54,8 @@ class Recommended extends StatelessWidget {
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'Songs for you',
                     'description': songList,
-                    'name': 'myMusic'
+                    'name': 'myMusic',
+                    'character': 'lady'
                   });
                 },
                 child: const Text('show more'))

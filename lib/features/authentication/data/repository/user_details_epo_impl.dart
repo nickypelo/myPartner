@@ -1,8 +1,9 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
-import 'package:girlfriend_translator/features/authentication/domain/entities/user_entity.dart';
-import 'package:girlfriend_translator/features/authentication/domain/repository/user_details_repo.dart';
+
+import '../../domain/entities/user_entity.dart';
+import '../../domain/repository/user_details_repo.dart';
+import '../models/user_details.dart';
+
 
 class UserDetailsRepoImpl extends UserDetailsRepository{
   

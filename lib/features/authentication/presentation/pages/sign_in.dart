@@ -1,7 +1,6 @@
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/core/shared/loading.dart';
 
+import '../../../../core/shared/loading.dart';
 import '../../data/repository/auth_service.dart';
 
 class SignIn extends StatefulWidget {
@@ -27,7 +26,20 @@ class _SignInState extends State<SignIn> {
     // height space
     double space = MediaQuery.of(context).size.width;
 
+    // user
+    // const user = Provider.of<AppUser?>(context);
+
+
     return loading ? const Loading() : Scaffold(
+      appBar: AppBar(
+        backgroundColor: Colors.purple[50],
+        // iconTheme: Colors.purple,
+        title: const Text('Sign In.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
+        centerTitle: true,
+        iconTheme: const IconThemeData(
+          color: Colors.deepPurple, // Set the desired color here
+        ),
+      ),
       body: SingleChildScrollView(
         child: Container(
           decoration: const BoxDecoration(
@@ -36,26 +48,26 @@ class _SignInState extends State<SignIn> {
             )
           ),
           padding: const EdgeInsets.symmetric(vertical: 50.0, horizontal: 50),
+          height: MediaQuery.of(context).size.height,
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            // mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              // SizedBox(height: space * .35,),
-              Container(
-                // margin: const EdgeInsets.only(top: 50),
-                width: space,
-                height: space * .5,
-                decoration: const BoxDecoration(
-                  image: DecorationImage(
-                    image: AssetImage('assets/signIn.png')
-                  )
-                ),
-              ),
+              SizedBox(height: space * .35,),
+              // Container(
+              //   // margin: const EdgeInsets.only(top: 50),
+              //   width: space,
+              //   height: space * .5,
+              //   decoration: const BoxDecoration(
+              //     image: DecorationImage(
+              //       image: AssetImage('assets/signIn.png')
+              //     )
+              //   ),
+              // ),
               Form(
                 key: _formKey,
                 child: Column(
                   children: <Widget>[
-                    const Text('Log In Your Account.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
-                    const SizedBox(height: 20.0,),
+                    // const Text('Sign In.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.bold, color: Colors.purple),),
                     TextFormField(
                       decoration:  InputDecoration(
                         hintText: 'Email',
@@ -89,7 +101,7 @@ class _SignInState extends State<SignIn> {
                   ],
                 ),
               ),
-              SizedBox(height: space * .4,),
+              SizedBox(height: space * .2,),
               Column(
                 children: [
                   ElevatedButton(
@@ -111,24 +123,27 @@ class _SignInState extends State<SignIn> {
                                   const SnackBar(content: Text('Try Again')));
                             });
                           }
+                          else{
+                            Navigator.pushReplacementNamed(context, '/');
+                          }
                         }
                       },
                       child: const Text('Sign In', style: TextStyle(color: Colors.white, fontSize: 16.0))),
                   const SizedBox(height: 10.0,),
-                  RichText(
-                    text: TextSpan(
-                        text: "You don't have an account?",
-                        style: const TextStyle(color: Colors.black54),
-                        children: [
-                          TextSpan(text: ' Sign Up', style: const TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
-                              recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/register'))
-                        ]
-                    ),
-                  ),
-                  const SizedBox(height: 50.0,),
+                  // RichText(
+                  //   text: TextSpan(
+                  //       text: "You don't have an account?",
+                  //       style: const TextStyle(color: Colors.black54),
+                  //       children: [
+                  //         TextSpan(text: ' Sign Up', style: const TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
+                  //             recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/register'))
+                  //       ]
+                  //   ),
+                  // ),
+                  // const SizedBox(height: 50.0,),
                 ],
               ),
-        
+
             ],
           )
         ),

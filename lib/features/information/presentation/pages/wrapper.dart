@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/relationship_model.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
-import 'package:girlfriend_translator/features/information/presentation/pages/home.dart';
+
 import 'package:provider/provider.dart';
 
 // local imports
+import '../../../authentication/data/models/relationship_model.dart';
 import '../../../authentication/data/models/user.dart';
+import '../../../authentication/data/models/user_details.dart';
 import 'greeting.dart';
 import 'guy_home.dart';
+import 'home.dart';
 
 class Wrapper extends StatelessWidget {
   const Wrapper({super.key});
@@ -30,6 +31,7 @@ class Wrapper extends StatelessWidget {
       // boyfriend/girlfriend login
       isBoyfriend = (couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail)) != -1;
     }
+    print('$user is NYASHA');
 
     if(user == null) {
       return const Greeting();
@@ -44,3 +46,4 @@ class Wrapper extends StatelessWidget {
     }
   }
 }
+

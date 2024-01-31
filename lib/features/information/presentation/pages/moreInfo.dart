@@ -1,10 +1,12 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/models/food_model.dart';
-import 'package:girlfriend_translator/features/information/data/models/highlight_model.dart';
-import 'package:girlfriend_translator/features/information/data/models/interest_model.dart';
-import 'package:girlfriend_translator/features/information/data/models/music_model.dart';
 
+
+import '../../data/models/food_model.dart';
+import '../../data/models/highlight_model.dart';
+import '../../data/models/interest_model.dart';
+import '../../data/models/music_model.dart';
 import '../widgets/forms/food_update.dart';
+import '../widgets/forms/highlight_update.dart';
 import '../widgets/forms/interest_update.dart';
 import '../widgets/forms/music_update.dart';
 import '../widgets/forms/personality_update.dart';
@@ -32,17 +34,27 @@ class _MoreInfoState extends State<MoreInfo> {
           child: formChecker == 'interests'
               ? const InterestUpdate()
               : formChecker == 'music'
-              ? const MusicUpdate()
+              ? MusicUpdate(who: data['character'])
               : formChecker == 'personality'
               ? const PersonalityUpdate()
-              : const FoodUpdate()
+              : formChecker == 'food'
+              ? const FoodUpdate()
+              : const HighlightUpdate()
         );
       });
     }
+
     return Scaffold(
       backgroundColor: Colors.purple[100],
       floatingActionButton:
-      formChecker != 'about' && formChecker != 'highlight' && formChecker != 'myMusic'
+      formChecker != 'about' || formChecker != 'highlight' || formChecker != 'myMusic'
+      ? FloatingActionButton(
+        child: const Text('Add'),
+        onPressed: (){
+          showAddPanel();
+        },
+      )
+      : data['character'] == 'guy' && formChecker == 'highlight'
       ? FloatingActionButton(
         child: const Text('Add'),
         onPressed: (){
@@ -50,6 +62,7 @@ class _MoreInfoState extends State<MoreInfo> {
         },
       )
       : null,
+
       appBar: AppBar(
         title: Text(data['title'], style: const TextStyle(color: Colors.white),),
         centerTitle: true,

@@ -1,7 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:girlfriend_translator/features/authentication/domain/entities/relationship_entity.dart';
-import 'package:girlfriend_translator/features/authentication/domain/repository/relationship_repo.dart';
 
+
+import '../../domain/entities/relationship_entity.dart';
+import '../../domain/repository/relationship_repo.dart';
 import '../models/relationship_model.dart';
 
 class RelationshipRepoImpl extends RelationshipRepository{

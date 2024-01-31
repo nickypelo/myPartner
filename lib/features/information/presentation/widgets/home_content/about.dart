@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/models/personality_model.dart';
+
+import '../../../data/models/personality_model.dart';
 
 class Personality extends StatelessWidget {
   const Personality({super.key, required this.personality});

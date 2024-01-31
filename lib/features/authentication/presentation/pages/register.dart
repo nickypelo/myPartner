@@ -1,15 +1,16 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/relationship_model.dart';
-import 'package:girlfriend_translator/features/authentication/data/repository/relationship_repo_impl.dart';
-import 'package:girlfriend_translator/features/authentication/data/repository/user_details_epo_impl.dart';
-import 'package:girlfriend_translator/features/information/data/models/lady_model.dart';
-import 'package:girlfriend_translator/features/information/data/repository/lady_repo.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../../../core/shared/loading.dart';
+import '../../../information/data/models/lady_model.dart';
+import '../../../information/data/repository/lady_repo.dart';
+import '../../data/models/relationship_model.dart';
 import '../../data/models/user_details.dart';
 import '../../data/repository/auth_service.dart';
+import '../../data/repository/relationship_repo_impl.dart';
+import '../../data/repository/user_details_epo_impl.dart';
 
 class Register extends StatefulWidget {
   const Register({super.key});
@@ -40,7 +41,7 @@ class _RegisterState extends State<Register> {
   @override
   Widget build(BuildContext context) {
 
-    double space = MediaQuery.of(context).size.width;
+    // double space = MediaQuery.of(context).size.width;
     // props
     data = ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>;
 
@@ -50,8 +51,7 @@ class _RegisterState extends State<Register> {
 
     return loading ? const Loading() : Scaffold(
       appBar: AppBar(
-        backgroundColor: Colors.purple[100],
-        // iconTheme: Colors.purple,
+        backgroundColor: Colors.purple[50],
         title: const Text('REGISTER.', style: TextStyle(fontSize: 32.0, fontWeight: FontWeight.w900, color: Colors.purple),),
         centerTitle: true,
       ),
@@ -254,17 +254,14 @@ class _RegisterState extends State<Register> {
                                   ladyBirthDate: _ladyBirthDate,
                                 );
 
-                                // print(item.firstname);
-                                print('registration');
                                 UserDetailsRepoImpl().addUserDetails(item);
                                 if(data['role'] == 'guy'){
                                   RelationshipRepoImpl().addRelationship(couple);
                                   LadyRepo(uid: result.uid).createLadyData(myLady);
-                                  print(couple.boyfriend);
                                 }
+                                  Navigator.pushReplacementNamed(context, '/');
                               }
                             }
-
                           }
                         },
                         child: const Text('Sign Up', style: TextStyle(color: Colors.white, fontSize: 16.0))),
@@ -275,7 +272,7 @@ class _RegisterState extends State<Register> {
                           style: const TextStyle(color: Colors.black54),
                           children: [
                             TextSpan(text: ' Sign In', style: const TextStyle(color: Colors.purple, fontWeight: FontWeight.bold),
-                                recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushReplacementNamed(context, '/login'),)
+                                recognizer: TapGestureRecognizer()..onTap = () => Navigator.pushNamed(context, '/login'),)
                           ]
                         ),
                     )

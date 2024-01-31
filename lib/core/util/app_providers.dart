@@ -1,12 +1,12 @@
-import 'package:girlfriend_translator/features/authentication/data/models/relationship_model.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
-import 'package:girlfriend_translator/features/authentication/data/repository/relationship_repo_impl.dart';
-import 'package:girlfriend_translator/features/authentication/data/repository/user_details_epo_impl.dart';
-import 'package:girlfriend_translator/features/information/presentation/provider/notification_provider.dart';
+
 import 'package:provider/provider.dart';
 
+import '../../features/authentication/data/models/relationship_model.dart';
 import '../../features/authentication/data/models/user.dart';
+import '../../features/authentication/data/models/user_details.dart';
 import '../../features/authentication/data/repository/auth_service.dart';
+import '../../features/authentication/data/repository/relationship_repo_impl.dart';
+import '../../features/authentication/data/repository/user_details_epo_impl.dart';
 import '../../features/information/data/models/food_model.dart';
 import '../../features/information/data/models/highlight_model.dart';
 import '../../features/information/data/models/interest_model.dart';
@@ -19,6 +19,7 @@ import '../../features/information/data/repository/interest_repo.dart';
 import '../../features/information/data/repository/lady_repo.dart';
 import '../../features/information/data/repository/music_repo.dart';
 import '../../features/information/data/repository/personality_repo.dart';
+import '../../features/information/presentation/provider/notification_provider.dart';
 
 final appProviders = [
   StreamProvider<AppUser?>.value(value: AuthService().user,initialData: null,catchError: (_,__){return null;},),

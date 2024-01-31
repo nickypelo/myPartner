@@ -2,26 +2,28 @@ import 'package:flutter/material.dart';
 
 //3rd party packages
 import 'package:accordion/accordion.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/mood.dart';
+
 
 // local imports
-import 'package:girlfriend_translator/features/information/presentation/widgets/profile.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/music.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/quote.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/about.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/food.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/hightlight.dart';
-import 'package:girlfriend_translator/features/information/presentation/widgets/home_content/interests.dart';
+
 import 'package:provider/provider.dart';
 import '../../../authentication/data/models/relationship_model.dart';
 import '../../../authentication/data/models/user.dart';
+import '../../../authentication/data/models/user_details.dart';
 import '../../../authentication/data/repository/auth_service.dart';
 import '../../data/models/food_model.dart';
 import '../../data/models/highlight_model.dart';
 import '../../data/models/interest_model.dart';
 import '../../data/models/music_model.dart';
 import '../../data/models/personality_model.dart';
+import '../widgets/home_content/about.dart';
+import '../widgets/home_content/food.dart';
+import '../widgets/home_content/hightlight.dart';
+import '../widgets/home_content/interests.dart';
+import '../widgets/home_content/mood.dart';
+import '../widgets/home_content/music.dart';
+import '../widgets/profile.dart';
+import '../widgets/quote.dart';
 
 
 class HomePage extends StatefulWidget {

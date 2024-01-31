@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user.dart';
-import 'package:girlfriend_translator/features/information/data/repository/interest_repo.dart';
+
 import 'package:provider/provider.dart';
+
+import '../../../../authentication/data/models/user.dart';
+import '../../../data/repository/interest_repo.dart';
 
 class InterestUpdate extends StatefulWidget {
   const InterestUpdate({super.key});

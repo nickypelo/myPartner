@@ -1,13 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/repository/music_repo.dart';
 import 'package:provider/provider.dart';
 
 import '../../../../authentication/data/models/user.dart';
+import '../../../data/repository/music_repo.dart';
 
 
 class MusicUpdate extends StatefulWidget {
-  const MusicUpdate({super.key});
+  const MusicUpdate({super.key, required this.who});
 
+  final String who;
   @override
   State<MusicUpdate> createState() => _MusicUpdateState();
 }
@@ -45,7 +46,7 @@ class _MusicUpdateState extends State<MusicUpdate> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState!.validate()){
-                        await MusicRepo(uid: user.uid).createInterestData('lady', _musicArtist, _musicSongName);
+                        await MusicRepo(uid: user.uid).createInterestData(widget.who, _musicArtist, _musicSongName);
                         Navigator.pop(context);
                       }
                     },

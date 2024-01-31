@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/presentation/provider/notification_provider.dart';
 import 'package:provider/provider.dart';
 
 import '../../../authentication/data/models/relationship_model.dart';
@@ -11,6 +10,7 @@ import '../../data/models/highlight_model.dart';
 import '../../data/models/interest_model.dart';
 import '../../data/models/music_model.dart';
 import '../../data/models/personality_model.dart';
+import '../provider/notification_provider.dart';
 
 class GuyHome extends StatefulWidget {
   const GuyHome({super.key});
@@ -65,8 +65,6 @@ class _GuyHomeState extends State<GuyHome> {
       myLady =  userDetails[partnerIndex];
     }
 
-
-
     // sizes
     double breadth = MediaQuery.of(context).size.width;
     double screenHeight = MediaQuery.of(context).size.height;
@@ -100,169 +98,181 @@ class _GuyHomeState extends State<GuyHome> {
             await GuyHome._auth.logoff();
           }
       ),
-      appBar: AppBar(
-        actions: [
-          IconButton(onPressed: (){}, icon: const Icon(Icons.settings))
-        ],
-      ),
-      body: SingleChildScrollView(
-        child: Column(
-          children: [
-            Container(
-              // height: screenHeight * 0.4 ,
-              width: breadth * .95,
-              padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18.0),
-              child: Column(
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Column(
+            children: [
+              Row(
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.spaceAround,
-                    children: [
-                      CircleAvatar(
-                        backgroundImage: const AssetImage('assets/happy.png'),
-                        radius: breadth * 0.15,
-                      ),
-                      CircleAvatar(
-                        backgroundImage: const AssetImage('assets/profile.png') ,
-                        radius: breadth * 0.15,
-                      )
-                    ],
-                  ),
-                  const SizedBox(height: 20.0,),
-                  Text('Welcome ${current.firstname.toString()}', style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),),
-                  const Text('What do you have in store for your lady?'),
-                  const SizedBox(height: 20.0,),
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 4.0, 8.0, 0),
+                    child: IconButton(onPressed: (){}, icon: const Icon(Icons.settings),iconSize: 32.0,),
+                  )
                 ],
               ),
-            ),
-        
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12.0),
-              height: screenHeight * 0.25,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: GestureDetector(
-                        onTap: (){
-                          Navigator.pushNamed(context, '/moreInfo', arguments: {
-                          'title': 'Music',
-                          'description': musicDisplay,
-                          'name': 'music',
-                          });
-                        },
-                        child: Container(
+              Container(
+                // height: screenHeight * 0.4 ,
+                width: breadth * .95,
+                padding: const EdgeInsets.symmetric(horizontal: 12.0, vertical: 18.0),
+                child: Column(
+                  children: [
+                    Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceAround,
+                      children: [
+                        CircleAvatar(
+                          backgroundImage: const AssetImage('assets/happy.png'),
+                          radius: breadth * 0.15,
+                        ),
+                        CircleAvatar(
+                          backgroundImage: const AssetImage('assets/profile.png') ,
+                          radius: breadth * 0.15,
+                        )
+                      ],
+                    ),
+                    const SizedBox(height: 20.0,),
+                    Text('Welcome ${current.firstname.toString()}', style: const TextStyle(fontSize: 20.0, fontWeight: FontWeight.w700),),
+                    const Text('What do you have in store for your lady?'),
+                    const SizedBox(height: 20.0,),
+                  ],
+                ),
+              ),
+
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                height: screenHeight * 0.25,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: GestureDetector(
+                          onTap: (){
+                            Navigator.pushNamed(context, '/moreInfo', arguments: {
+                            'title': 'Music',
+                            'description': musicDisplay,
+                            'name': 'music',
+                            'character': current.role
+                            });
+                          },
+                          child: Container(
+                              padding: const EdgeInsets.all(8.0),
+                              height: screenHeight * 0.3,
+                              color: Colors.deepOrange,
+                              child: const Center(child: Text('MUSIC', style: TextStyle(fontSize: 16.0,  fontWeight: FontWeight.bold)))),
+                        )
+                    ),
+                    const SizedBox(width: 10.0,),
+                    Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(
+                                child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, '/moreInfo', arguments: {
+                                      'title': 'Food',
+                                      'description': foodDisplay,
+                                      'name': 'food',
+                                      'character': current.role
+                                    });
+                                  },
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      width: breadth * 0.5,
+                                      color: Colors.indigo,
+                                      child: const Center(child: Text('FOOD', style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)))),
+                                )
+                            ),
+                            const SizedBox(height: 10.0,),
+                            Expanded(
+                                child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, '/moreInfo', arguments: {
+                                      'title': 'What you like about her',
+                                      'description': highlightDisplay,
+                                      'name': 'highlight',
+                                      'character': current.role
+                                    });
+                                  },
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      width: breadth * 0.5,
+                                      color: Colors.amber,
+                                      child: const Center(child: Text('WHAT YOU LIKE ABOUT HER', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,))),
+                                )
+                            ),
+                          ],
+                        ))
+                  ],
+                ),
+              ),
+              const SizedBox(height: 10.0,),
+              Container(
+                margin: const EdgeInsets.symmetric(horizontal: 12.0),
+                height: screenHeight * 0.25,
+                child: Row(
+                  children: [
+                    Expanded(
+                        child: Column(
+                          children: [
+                            Expanded(
+                                child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, '/moreInfo', arguments: {
+                                    'title': 'Her Personality',
+                                    'description': personalityDisplay,
+                                    'name': 'personality',
+                                    'character': current.role
+                                    });
+                                  },
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      width: breadth * 0.5,
+                                      color: Colors.amber,
+                                      child: const Center(child: Text('HER PERSONALITY', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)))),
+                                )
+                            ),
+                            const SizedBox(height: 10.0,),
+                            Expanded(
+                                child: GestureDetector(
+                                  onTap: (){
+                                    Navigator.pushNamed(context, '/moreInfo', arguments: {
+                                      'title': 'What She Likes',
+                                      'description': interestDisplay,
+                                      'name': 'interests',
+                                      'character': current.role
+                                    });
+                                  },
+                                  child: Container(
+                                      padding: const EdgeInsets.all(8.0),
+                                      width: breadth * 0.5,
+                                      color: Colors.indigo,
+                                      child: const Center(child: Text('WHAT SHE LIKES?', style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)))),
+                                )
+                            ),
+                          ],
+                        )
+                    ),
+                    const SizedBox(width: 10.0,),
+                    Expanded(
+                        child: GestureDetector(
+                          onTap: (){
+                            // NotificationService().sendNotification(1, "${myLady.firstname.toString()}'s mood", '${current.firstname}, ${messageProvider.message}');
+                            Navigator.pushNamed(context, '/moodInfo', arguments: {
+                              'moodAttribute': messageProvider.message
+                            });
+                          },
+                          child: Container(
                             padding: const EdgeInsets.all(8.0),
-                            height: screenHeight * 0.3,
-                            color: Colors.deepOrange,
-                            child: const Center(child: Text('MUSIC', style: TextStyle(fontSize: 16.0,  fontWeight: FontWeight.bold)))),
-                      )
-                  ),
-                  const SizedBox(width: 10.0,),
-                  Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                              child: GestureDetector(
-                                onTap: (){
-                                  Navigator.pushNamed(context, '/moreInfo', arguments: {
-                                    'title': 'Food',
-                                    'description': foodDisplay,
-                                    'name': 'food',
-                                  });
-                                },
-                                child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    width: breadth * 0.5,
-                                    color: Colors.indigo,
-                                    child: const Center(child: Text('FOOD', style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)))),
-                              )
-                          ),
-                          const SizedBox(height: 10.0,),
-                          Expanded(
-                              child: GestureDetector(
-                                onTap: (){
-                                  Navigator.pushNamed(context, '/moreInfo', arguments: {
-                                    'title': 'What you like about her',
-                                    'description': highlightDisplay,
-                                    'name': 'highlight',
-                                  });
-                                },
-                                child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    width: breadth * 0.5,
-                                    color: Colors.amber,
-                                    child: const Center(child: Text('WHAT YOU LIKE ABOUT HER', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,))),
-                              )
-                          ),
-                        ],
-                      ))
-                ],
+                              height: screenHeight * 0.3,
+                              color: Colors.deepOrange,
+                              child:  Center(child: Text('MOOD SUGGESTIONS ${messageProvider.message}', style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)))),
+                        )
+                    ),
+                  ],
+                ),
               ),
-            ),
-            const SizedBox(height: 10.0,),
-            Container(
-              margin: const EdgeInsets.symmetric(horizontal: 12.0),
-              height: screenHeight * 0.25,
-              child: Row(
-                children: [
-                  Expanded(
-                      child: Column(
-                        children: [
-                          Expanded(
-                              child: GestureDetector(
-                                onTap: (){
-                                  Navigator.pushNamed(context, '/moreInfo', arguments: {
-                                  'title': 'Her Personality',
-                                  'description': personalityDisplay,
-                                  'name': 'personality',
-                                  });
-                                },
-                                child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    width: breadth * 0.5,
-                                    color: Colors.amber,
-                                    child: const Center(child: Text('HER PERSONALITY', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)))),
-                              )
-                          ),
-                          const SizedBox(height: 10.0,),
-                          Expanded(
-                              child: GestureDetector(
-                                onTap: (){
-                                  Navigator.pushNamed(context, '/moreInfo', arguments: {
-                                    'title': 'What She Likes',
-                                    'description': interestDisplay,
-                                    'name': 'interests',
-                                  });
-                                },
-                                child: Container(
-                                    padding: const EdgeInsets.all(8.0),
-                                    width: breadth * 0.5,
-                                    color: Colors.indigo,
-                                    child: const Center(child: Text('WHAT SHE LIKES?', style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)))),
-                              )
-                          ),
-                        ],
-                      )
-                  ),
-                  const SizedBox(width: 10.0,),
-                  Expanded(
-                      child: GestureDetector(
-                        onTap: (){
-                          // NotificationService().sendNotification(1, "${myLady.firstname.toString()}'s mood", '${current.firstname}, ${messageProvider.message}');
-                          Navigator.pushNamed(context, '/moodInfo', arguments: {
-                            'moodAttribute': messageProvider.message
-                          });
-                        },
-                        child: Container(
-                          padding: const EdgeInsets.all(8.0),
-                            height: screenHeight * 0.3,
-                            color: Colors.deepOrange,
-                            child:  Center(child: Text('MOOD SUGGESTIONS ${messageProvider.message}', style: const TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)))),
-                      )
-                  ),
-                ],
-              ),
-            )
-          ],
+              const SizedBox(height: 20.0,),
+            ],
+          ),
         ),
       ),
     );

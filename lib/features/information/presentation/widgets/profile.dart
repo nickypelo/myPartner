@@ -1,9 +1,10 @@
 import 'dart:ui';
 
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user_details.dart';
-import 'package:girlfriend_translator/features/information/data/models/lady_model.dart';
 import 'package:provider/provider.dart';
+
+import '../../../authentication/data/models/user_details.dart';
+import '../../data/models/lady_model.dart';
 
 
 class Profile extends StatelessWidget {

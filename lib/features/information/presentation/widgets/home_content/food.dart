@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/models/food_model.dart';
+
+import '../../../data/models/food_model.dart';
 
 class Food extends StatelessWidget {
   const Food({super.key, required this.food});

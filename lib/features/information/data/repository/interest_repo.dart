@@ -1,5 +1,6 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:girlfriend_translator/features/information/data/models/interest_model.dart';
+
+import '../models/interest_model.dart';
 
 class InterestRepo{
 

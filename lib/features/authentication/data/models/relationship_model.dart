@@ -1,4 +1,5 @@
-import 'package:girlfriend_translator/features/authentication/domain/entities/relationship_entity.dart';
+
+import '../../domain/entities/relationship_entity.dart';
 
 class RelationshipModel extends RelationshipEntity{
   RelationshipModel({

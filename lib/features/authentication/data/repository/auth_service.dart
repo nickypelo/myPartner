@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
-import 'package:girlfriend_translator/features/authentication/data/models/user.dart';
+
+import '../models/user.dart';
 
 
 class AuthService {
@@ -24,7 +25,7 @@ class AuthService {
       return _userFromFirebaseUser(user!);
     }
     catch(e){
-      print(e.toString());
+      // print(e.toString());
       return null;
     }
   }
@@ -38,7 +39,7 @@ class AuthService {
       return _userFromFirebaseUser(user!);
     }
     catch(e){
-      print(e.toString());
+      // print(e.toString());
       return null;
     }
   }
@@ -49,7 +50,7 @@ class AuthService {
       return await _auth.signOut();
     }
     catch(e){
-      print(e.toString());
+      // print(e.toString());
       return null;
     }
   }

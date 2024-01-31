@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:girlfriend_translator/features/information/data/repository/food_repo.dart';
-import 'package:girlfriend_translator/features/information/domain/entities/food_entity.dart';
+
 import 'package:provider/provider.dart';
 
 import '../../../../authentication/data/models/user.dart';
+import '../../../data/repository/food_repo.dart';
+import '../../../domain/entities/food_entity.dart';
 
 
 class FoodUpdate extends StatefulWidget {
