@@ -20,10 +20,10 @@ class Mood extends StatelessWidget {
             flex: 1,
             child: RichText(
               text:  const TextSpan(
-                text: 'HOW DO', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
+                text: '', style: TextStyle(fontWeight: FontWeight.w900, color: Colors.white),
                 children: [
-                  TextSpan(text: '\nYOU >>', style: TextStyle(letterSpacing: 2,fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20.0)),
-                  TextSpan(text: '\nFEEL?',style: TextStyle(letterSpacing: 1.5,fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20.0))
+                  TextSpan(text: '\nMOOD:', style: TextStyle(letterSpacing: 2,fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20.0)),
+                  TextSpan(text: '\n',style: TextStyle(letterSpacing: 1.5,fontWeight: FontWeight.w900, color: Colors.white, fontSize: 20.0))
                 ]
               ),
             ),

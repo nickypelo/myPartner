@@ -76,7 +76,7 @@ class _GreetingState extends State<Greeting> {
                   ElevatedButton(
                     style: ElevatedButton.styleFrom(
                       backgroundColor: Colors.deepPurple,
-                      padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 8.0)
+                        padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 4.0)
                     ),
                       onPressed: (){
                       Navigator.pushNamed(context, '/register', arguments: {'role': 'lady'});
@@ -89,7 +89,7 @@ class _GreetingState extends State<Greeting> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple,
-                          padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 8.0)
+                          padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 4.0)
                       ),
                       onPressed: (){
                         if (_pageController.hasClients) {
@@ -139,12 +139,12 @@ class _GreetingState extends State<Greeting> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.deepPurple,
-                          padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 8.0)
+                          padding: EdgeInsets.symmetric(horizontal: space * .4 , vertical: 4.0)
                       ),
                       onPressed: (){
                         Navigator.pushNamed(context, '/register', arguments: {'role': 'guy'});
                       },
-                      child: const Text('Sign Up', style: TextStyle(fontSize: 24.0,color: Colors.white, fontWeight: FontWeight.bold),)
+                      child: const Text('Sign Up', style: TextStyle(fontSize: 16.0,color: Colors.white, fontWeight: FontWeight.bold),)
                   ),
                   SizedBox(height: space * .5),
 

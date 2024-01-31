@@ -105,81 +105,84 @@ class _HomePageState extends State<HomePage> {
             await HomePage._auth.logoff();
           }
       ),
-      body: SafeArea(
-        child: Container(
-          decoration: const BoxDecoration(
-            image: DecorationImage(
-              image: AssetImage('assets/bg-gf.jpg'), fit: BoxFit.fitHeight
-            )
-          ),
-          child: SingleChildScrollView(
-              child: Column(
-                children: <Widget>[
-                  const SizedBox(height: 8.0,),
-                  Profile(myLady: userDetails[index], myDude: userDetails[partnerIndex]),
-                  const SizedBox(height: 25.0,),
-                  const Mood(),
-                  const SizedBox(height: 15.0,),
-                  Accordion(
-                    children: [
-                      AccordionSection(
+      body: SingleChildScrollView(
+        child: SafeArea(
+          child: Container(
+            decoration: const BoxDecoration(
+              image: DecorationImage(
+                image: AssetImage('assets/bg-gf.jpg'), fit: BoxFit.fitHeight
+              )
+            ),
+            // height: MediaQuery.of(context).size.height,
+            child: Column(
+              children: <Widget>[
+                const SizedBox(height: 8.0,),
+                Profile(myLady: userDetails[index], myDude: userDetails[partnerIndex]),
+                const SizedBox(height: 8.0,),
+                const Mood(),
+                // const SizedBox(height: 15.0,),
+                Accordion(
+                  children: [
+                    AccordionSection(
+                      headerBackgroundColor: Colors.deepPurple,
+                      headerBorderRadius: 0,
+                      headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
+                      headerPadding: const EdgeInsets.all(8.0),
+                      contentBackgroundColor: Colors.white.withOpacity(0.1),
+                      leftIcon: Image.asset('assets/myBook.png'),
+                      header: const Header(heading: 'Word of the day',),
+                      content: const Quote(),
+                    ),
+                    AccordionSection(
+                        headerBackgroundColor: Colors.green[700],
+                        headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
+                        headerBorderRadius: 0,
+                        headerPadding: const EdgeInsets.all(8.0),
+                        leftIcon: Image.asset('assets/persona.png'),
+                        header: const Header(heading: 'Personality',),
+                        content: Personality(personality: personalityDisplay.isEmpty ? [PersonalityModel(ladyPersonalityDescription: '', personalityID: '0')] : personalityDisplay,)
+                    ),
+                    AccordionSection(
                         headerBackgroundColor: Colors.deepPurple,
+                        headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
+                        headerPadding: const EdgeInsets.all(8.0),
+                        headerBorderRadius: 0,
+                        leftIcon: Image.asset('assets/interest.png'),
+                        header: const Header(heading: 'Interests'),
+                        content: Interests(interest: interestDisplay.isEmpty ? [InterestModel(interestID: '', ladyInterest: '')] : interestDisplay,)
+                    ),
+                    AccordionSection(
+                        headerBackgroundColor: Colors.green[700],
                         headerBorderRadius: 0,
                         headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
                         headerPadding: const EdgeInsets.all(8.0),
-                        contentBackgroundColor: Colors.white.withOpacity(0.1),
-                        leftIcon: Image.asset('assets/myBook.png'),
-                        header: const Header(heading: 'Word of the day',),
-                        content: const Quote(),
-                      ),
-                      AccordionSection(
-                          headerBackgroundColor: Colors.green[700],
-                          headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
-                          headerBorderRadius: 0,
-                          headerPadding: const EdgeInsets.all(8.0),
-                          leftIcon: Image.asset('assets/persona.png'),
-                          header: const Header(heading: 'Personality',),
-                          content: Personality(personality: personalityDisplay.isEmpty ? [PersonalityModel(ladyPersonalityDescription: '', personalityID: '0')] : personalityDisplay,)
-                      ),
-                      AccordionSection(
-                          headerBackgroundColor: Colors.deepPurple,
-                          headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
-                          headerPadding: const EdgeInsets.all(8.0),
-                          headerBorderRadius: 0,
-                          leftIcon: Image.asset('assets/interest.png'),
-                          header: const Header(heading: 'Interests'),
-                          content: Interests(interest: interestDisplay.isEmpty ? [InterestModel(interestID: '', ladyInterest: '')] : interestDisplay,)
-                      ),
-                      AccordionSection(
-                          headerBackgroundColor: Colors.green[700],
-                          headerBorderRadius: 0,
-                          headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
-                          headerPadding: const EdgeInsets.all(8.0),
-                          leftIcon: Image.asset('assets/foody.png'),
-                          header: const Header(heading: 'Food',),
-                          content: Food(food: foodDisplay.isEmpty ? [FoodModel(foodID: '1', ladyFoodItem1: '', ladyFoodItem2: '', ladyFoodPlace: '')] : foodDisplay,)
-                      ),
-                      AccordionSection(
-                          headerBackgroundColor: Colors.deepPurple,
-                          headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
-                          headerPadding: const EdgeInsets.all(8.0),
-                          headerBorderRadius: 0,
-                          leftIcon: Image.asset('assets/music.png'),
-                          header: const Header(heading: 'Music'),
-                          content: Music(music: musicDisplay.isEmpty ? [MusicModel(musicArtist: '', musicID: '', musicSongName: '', musicWho: '')] : musicDisplay,)
-                      ),
-                      AccordionSection(
-                          headerBackgroundColor: Colors.green[700],
-                          headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
-                          headerPadding: const EdgeInsets.all(8.0),
-                          headerBorderRadius: 0,
-                          leftIcon: Image.asset('assets/freak.png'),
-                          header: const Header(heading: 'What I like About You',),
-                          content: Highlights(highlight: highlightDisplay.isEmpty ? [HighlightModel(highlightID: '', ladyHighlight: '')] : highlightDisplay,)
-                      ),
-                    ],
-                  ),
-                ],)
+                        leftIcon: Image.asset('assets/burger.png'),
+                        header: const Header(heading: 'Food',),
+                        content: Food(food: foodDisplay.isEmpty ? [FoodModel(foodID: '1', ladyFoodItem1: '', ladyFoodItem2: '', ladyFoodPlace: '')] : foodDisplay,)
+                    ),
+                    AccordionSection(
+                        headerBackgroundColor: Colors.deepPurple,
+                        headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
+                        headerPadding: const EdgeInsets.all(8.0),
+                        headerBorderRadius: 0,
+                        leftIcon: Image.asset('assets/music.png'),
+                        header: const Header(heading: 'Music'),
+                        content: Music(music: musicDisplay.isEmpty ? [MusicModel(musicArtist: '', musicID: '', musicSongName: '', musicWho: '')] : musicDisplay,)
+                    ),
+                    AccordionSection(
+                        headerBackgroundColor: Colors.green[700],
+                        headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
+                        headerPadding: const EdgeInsets.all(8.0),
+                        headerBorderRadius: 0,
+                        leftIcon: Image.asset('assets/freak.png'),
+                        header: const Header(heading: 'What I like About You',),
+                        content: Highlights(highlight: highlightDisplay.isEmpty ? [HighlightModel(highlightID: '', ladyHighlight: '')] : highlightDisplay,)
+                    ),
+                  ],
+                ),
+                const SizedBox(height: 20.0,),
+              ],
+            ),
           ),
         ),
       ),
@@ -195,17 +198,13 @@ class Header extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        height: 50.0,
         decoration: const BoxDecoration(
         borderRadius: BorderRadius.only(
           topRight: Radius.circular(80.0),
         )
       ),
-        child: Padding(
-          padding: const EdgeInsets.only(top: 12.0),
-          child: Text(heading,
-            style: const TextStyle(letterSpacing: 1,fontSize: 17.0, color: Colors.white, fontWeight: FontWeight.bold),),
-        )
+        child: Text(heading,
+          style: const TextStyle(letterSpacing: 1,fontSize: 17.0, color: Colors.white, fontWeight: FontWeight.bold),)
     );
   }
 }

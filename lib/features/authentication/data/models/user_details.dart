@@ -2,11 +2,17 @@
 import '../../domain/entities/user_entity.dart';
 
 class UserDetailsModel extends UserDetailsEntity{
+  @override
   String? userID;
+  @override
   String? firstname;
+  @override
   String? lastname;
+  @override
   String? partnerEmail;
+  @override
   String? role;
+  @override
   String? fcmToken;
 
   UserDetailsModel(
@@ -28,6 +34,7 @@ class UserDetailsModel extends UserDetailsEntity{
       fcmToken: fcmToken
     );
 
+  @override
   Map<String, dynamic> userDetailsMap(){
     return {
       'userID': userID,

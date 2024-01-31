@@ -10,6 +10,7 @@ class RelationshipModel extends RelationshipEntity{
     girlfriend: girlfriend,
   );
 
+  @override
   Map<String, dynamic> relationshipMap(){
     return {
       'boyfriend': boyfriend,

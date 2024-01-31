@@ -31,7 +31,6 @@ class Wrapper extends StatelessWidget {
       // boyfriend/girlfriend login
       isBoyfriend = (couple.indexWhere((element) => element.girlfriend == userDetails[index].partnerEmail)) != -1;
     }
-    print('$user is NYASHA');
 
     if(user == null) {
       return const Greeting();

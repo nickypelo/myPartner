@@ -107,7 +107,7 @@ class _SignInState extends State<SignIn> {
                   ElevatedButton(
                       style: ElevatedButton.styleFrom(
                           backgroundColor: Colors.purple,
-                          padding: const EdgeInsets.symmetric(horizontal: 100.0, vertical: 12.0)
+                          padding: const EdgeInsets.symmetric(horizontal: 50.0, vertical: 4.0)
                       ),
                       onPressed: () async {
                         if(_formKey.currentState!.validate()){

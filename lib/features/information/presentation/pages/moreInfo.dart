@@ -35,7 +35,7 @@ class _MoreInfoState extends State<MoreInfo> {
               ? const InterestUpdate()
               : formChecker == 'music'
               ? MusicUpdate(who: data['character'])
-              : formChecker == 'personality'
+              : formChecker == 'about'
               ? const PersonalityUpdate()
               : formChecker == 'food'
               ? const FoodUpdate()
@@ -47,7 +47,7 @@ class _MoreInfoState extends State<MoreInfo> {
     return Scaffold(
       backgroundColor: Colors.purple[100],
       floatingActionButton:
-      formChecker != 'about' || formChecker != 'highlight' || formChecker != 'myMusic'
+      formChecker != 'about' && formChecker != 'highlight' && formChecker != 'myMusic'
       ? FloatingActionButton(
         child: const Text('Add'),
         onPressed: (){
@@ -94,7 +94,12 @@ class _MoreInfoState extends State<MoreInfo> {
                   ? ListView.builder(
                       itemCount: data['description'].length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => Text(data['description'][index].ladyInterest.toString(), style: const TextStyle(fontSize: 16.0),), // Wrap title in Text
+                      itemBuilder: (context, index) => ListTile(
+                          contentPadding: EdgeInsets.zero,
+                          dense: true,
+                          title: Text(data['description'][index].ladyInterest.toString(), style: const TextStyle(fontSize: 14.0),),
+                          trailing: TextButton.icon(onPressed: (){showAddPanel();}, icon: const Icon(Icons.edit, size: 12.0,), label: const Text('Edit', style: TextStyle(fontSize: 12.0),)),
+                      ), // Wrap title in Text
                     )
                   : data['description'] is List<HighlightModel>
                   ? ListView.builder(

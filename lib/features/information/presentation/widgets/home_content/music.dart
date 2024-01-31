@@ -19,7 +19,7 @@ class Music extends StatelessWidget {
               headerBackgroundColor: Colors.green[700],
               headerBackgroundColorOpened: Colors.black.withOpacity(0.55),
               headerPadding: const EdgeInsets.all(8.0),
-              leftIcon: Image.asset('assets/recom.png'),
+              leftIcon: Image.asset('assets/recommended.png'),
               header: const Text('Recommended', style: TextStyle(fontSize: 16.0,  color: Colors.white),),
               content: Recommended(songList: musicRecommended,)
           ),
