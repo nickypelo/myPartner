@@ -18,6 +18,8 @@ class Highlights extends StatelessWidget {
           itemCount: highlightDisplay.length,
             itemBuilder: (context, index){
             return ListTile(
+                contentPadding: EdgeInsets.zero,
+                dense: true,
                 title: Text(highlightDisplay[index].ladyHighlight.toString(), style: const TextStyle(fontSize: 14),));
             }
       ),

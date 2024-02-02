@@ -19,6 +19,8 @@ class Interests extends StatelessWidget {
           shrinkWrap: true,
           itemBuilder: (context, index){
             return ListTile(
+              contentPadding: EdgeInsets.zero,
+              dense: true,
               title: Text(interestDisplay[index].ladyInterest.toString(), style: const TextStyle(fontSize: 14),),
             ) ;
           }

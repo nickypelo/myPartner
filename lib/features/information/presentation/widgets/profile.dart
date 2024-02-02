@@ -62,18 +62,15 @@ class _ProfileState extends State<Profile> {
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
-                  Expanded(
-                    flex: 2,
-                    child: Container(
-                      padding: const EdgeInsets.fromLTRB(4, 12, 0, 0),
-                      width: MediaQuery.of(context).size.width * .5,
-                      height: 80,
-                      child:  ListTile(
-                        title: Text(widget.myLady.firstname.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
-                        subtitle: Text(widget.myLady.lastname.toString(), style:  const TextStyle(color: Colors.white),),
-                        ),
+                  Container(
+                    padding: const EdgeInsets.fromLTRB(4, 12, 0, 0),
+                    width: MediaQuery.of(context).size.width * .5,
+                    height: 80,
+                    child:  ListTile(
+                      title: Text(widget.myLady.firstname.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
+                      subtitle: Text(widget.myLady.lastname.toString(), style:  const TextStyle(color: Colors.white),),
                       ),
-                  ),
+                    ),
                   GestureDetector(
                     onLongPress: () async{
                       showDialog(
@@ -94,13 +91,10 @@ class _ProfileState extends State<Profile> {
                           }
                         );
                     },
-                    child: const Expanded(
-                      flex: 1,
-                      child: CircleAvatar(
-                        // backgroundColor: Colors.black,
-                        backgroundImage: AssetImage('assets/profile.png'),
-                        radius: 42,
-                      ),
+                    child: const CircleAvatar(
+                      // backgroundColor: Colors.black,
+                      backgroundImage: AssetImage('assets/profile.png'),
+                      radius: 42,
                     ),
                   ),
                 ],

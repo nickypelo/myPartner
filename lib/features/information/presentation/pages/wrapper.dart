@@ -16,9 +16,13 @@ class Wrapper extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // data
-    final user = Provider.of<AppUser?>(context);
-    final userDetails = Provider.of<List<UserDetailsModel>>(context);
-    final couple = Provider.of<List<RelationshipModel>>(context);
+    // final user = Provider.of<AppUser?>(context);
+    // final userDetails = Provider.of<List<UserDetailsModel>>(context);
+    // final couple = Provider.of<List<RelationshipModel>>(context);
+
+    final user = context.watch<AppUser?>();
+    final userDetails = context.watch<List<UserDetailsModel>>();
+    final couple = context.watch<List<RelationshipModel>>();
 
     bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
     bool isBoyfriend = false;

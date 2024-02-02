@@ -57,9 +57,12 @@ class _GuyHomeState extends State<GuyHome> {
 
   @override
   Widget build(BuildContext context) {
-    final user = Provider.of<AppUser?>(context);
-    final userDetails = Provider.of<List<UserDetailsModel>>(context);
-    final couple = Provider.of<List<RelationshipModel>>(context);
+    // final user = Provider.of<AppUser?>(context);
+    // final userDetails = Provider.of<List<UserDetailsModel>>(context);
+    // final couple = Provider.of<List<RelationshipModel>>(context);
+    final user = Provider.of<AppUser?>(context, listen: true);
+    final userDetails = Provider.of<List<UserDetailsModel>>(context, listen: true);
+    final couple = Provider.of<List<RelationshipModel>>(context, listen: true);
 
     // establish users
     UserDetailsModel current = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
@@ -99,14 +102,20 @@ class _GuyHomeState extends State<GuyHome> {
     double screenHeight = MediaQuery.of(context).size.height;
 
     // call my data
-    final food = Provider.of<List<FoodModel>>(context);
-    final music = Provider.of<List<MusicModel>>(context);
-    final highlight = Provider.of<List<HighlightModel>>(context);
-    final interest = Provider.of<List<InterestModel>>(context);
-    final personality = Provider.of<List<PersonalityModel>>(context);
+    // final food = Provider.of<List<FoodModel>>(context);
+    // final music = Provider.of<List<MusicModel>>(context);
+    // final highlight = Provider.of<List<HighlightModel>>(context);
+    // final interest = Provider.of<List<InterestModel>>(context);
+    // final personality = Provider.of<List<PersonalityModel>>(context);
     // messages
     final messageProvider = Provider.of<MessageProvider>(context);
 
+    // call my data
+    final food = context.watch<List<FoodModel>>();
+    final music = context.watch<List<MusicModel>>();
+    final highlight = context.watch<List<HighlightModel>>();
+    final interest = context.watch<List<InterestModel>>();
+    final personality = context.watch<List<PersonalityModel>>();
 
     // list my data for presentation
     List<FoodModel> foodDisplay = food.where((item) => item.foodID == current.userID || item.foodID == myLady.userID).toList();
@@ -204,7 +213,7 @@ class _GuyHomeState extends State<GuyHome> {
                       :
                       CircleAvatar(
                         backgroundImage:MemoryImage(_myImage!),
-                        radius: breadth * 0.15,
+                        radius: breadth * 0.2,
                       ),
                     ],
                   ),

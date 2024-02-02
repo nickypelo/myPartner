@@ -15,7 +15,6 @@ import '../../data/models/highlight_model.dart';
 import '../../data/models/interest_model.dart';
 import '../../data/models/music_model.dart';
 import '../../data/models/personality_model.dart';
-import '../provider/notification_provider.dart';
 import '../widgets/home_content/about.dart';
 import '../widgets/home_content/food.dart';
 import '../widgets/home_content/hightlight.dart';
@@ -84,11 +83,16 @@ class _HomePageState extends State<HomePage> {
     }
 
     // call my data
-    final food = Provider.of<List<FoodModel>>(context);
-    final music = Provider.of<List<MusicModel>>(context);
-    final highlight = Provider.of<List<HighlightModel>>(context);
-    final interest = Provider.of<List<InterestModel>>(context);
-    final personality = Provider.of<List<PersonalityModel>>(context);
+    // final food = Provider.of<List<FoodModel>>(context);
+    // final music = Provider.of<List<MusicModel>>(context);
+    // final highlight = Provider.of<List<HighlightModel>>(context);
+    // final interest = Provider.of<List<InterestModel>>(context);
+    // final personality = Provider.of<List<PersonalityModel>>(context);
+    final food = context.watch<List<FoodModel>>();
+    final music = context.watch<List<MusicModel>>();
+    final highlight = context.watch<List<HighlightModel>>();
+    final interest = context.watch<List<InterestModel>>();
+    final personality = context.watch<List<PersonalityModel>>();
 
 
     // list my data for presentation

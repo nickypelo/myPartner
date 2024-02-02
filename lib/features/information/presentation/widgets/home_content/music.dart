@@ -113,8 +113,8 @@ class Table extends StatelessWidget {
       ],
       rows:  songList.map((item) => DataRow(
         cells: <DataCell>[
-          DataCell(Text(item.musicArtist.toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
-          DataCell(Text(item.musicSongName.toString())),
+          DataCell(Text(item.musicArtist.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 12.0),)),
+          DataCell(Text(item.musicSongName.toString(), style: const TextStyle(fontSize: 12.0),)),
         ],),).toList(),
     );
   }
