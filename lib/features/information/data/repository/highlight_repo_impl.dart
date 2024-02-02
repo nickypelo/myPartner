@@ -13,9 +13,8 @@ class HighlightRepositoryImpl extends HighlightRepository{
   }
 
   @override
-  Future<void> deleteHighlight(String docID) {
-    // TODO: implement deleteHighlight
-    throw UnimplementedError();
+  Future<void> deleteHighlight(String docID) async{
+    await highlightCollection.doc(docID).delete();
   }
 
   @override

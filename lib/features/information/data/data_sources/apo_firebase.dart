@@ -47,11 +47,6 @@ class FirebaseApi {
          }
         )
       );
-      // FirebaseMessaging.onMessage.listen((RemoteMessage message) {
-      //   // Access the broadcast message here
-      //   print('Broadcast received: ${message.data}');
-      //   NotificationService().sendNotification(1, message.data['title'], message.data['body']);
-      // });
     }
     catch(e){
       // print('eish');

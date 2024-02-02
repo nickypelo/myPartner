@@ -1,5 +1,8 @@
+import 'package:MyPartner/features/information/data/repository/food_repo_impl.dart';
+import 'package:MyPartner/features/information/data/repository/highlight_repo_impl.dart';
+import 'package:MyPartner/features/information/data/repository/interest_repo_impl.dart';
+import 'package:MyPartner/features/information/data/repository/music_repo_impl.dart';
 import 'package:flutter/material.dart';
-
 
 import '../../data/models/food_model.dart';
 import '../../data/models/highlight_model.dart';
@@ -73,7 +76,7 @@ class _MoreInfoState extends State<MoreInfo> {
         padding: const EdgeInsets.all(16.0),
         width: MediaQuery.of(context).size.width,
         height: MediaQuery.of(context).size.height,
-        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 12.0),
+        margin: const EdgeInsets.symmetric(vertical: 10.0, horizontal: 8.0),
         decoration: BoxDecoration(
           border: Border.all(width: 2.0, color: Colors.black),
           borderRadius: BorderRadius.circular(12.0)
@@ -98,14 +101,23 @@ class _MoreInfoState extends State<MoreInfo> {
                           contentPadding: EdgeInsets.zero,
                           dense: true,
                           title: Text(data['description'][index].ladyInterest.toString(), style: const TextStyle(fontSize: 14.0),),
-                          trailing: TextButton.icon(onPressed: (){showAddPanel();}, icon: const Icon(Icons.edit, size: 12.0,), label: const Text('Edit', style: TextStyle(fontSize: 12.0),)),
+                          trailing: IconButton(onPressed: (){
+                            InterestRepositoryImpl().deleteInterest(data['description'][index].documentID.toString());
+                          }, icon: const Icon(Icons.delete, size: 16.0,)),
                       ), // Wrap title in Text
                     )
                   : data['description'] is List<HighlightModel>
                   ? ListView.builder(
                       itemCount: data['description'].length,
                       shrinkWrap: true,
-                      itemBuilder: (context, index) => Text(data['description'][index].ladyHighlight.toString(), style: const TextStyle(fontSize: 16.0),)
+                      itemBuilder: (context, index) => ListTile(
+                        contentPadding: EdgeInsets.zero,
+                          dense: true,
+                          title: Text(data['description'][index].ladyHighlight.toString(), style: const TextStyle(fontSize: 16.0),),
+                        trailing: IconButton(onPressed: (){
+                          HighlightRepositoryImpl().deleteHighlight(data['description'][index].documentID.toString());
+                        }, icon: const Icon(Icons.delete, size: 16.0,)),
+                      )
                     )
                   : ListView.builder(
                      itemCount: data['description'].length,
@@ -127,23 +139,23 @@ class FoodTable extends StatelessWidget {
   final List<FoodModel> foodList;
   @override
   Widget build(BuildContext context) {
+
+    double breadth = MediaQuery.of(context).size.width * .09;
+
     return DataTable(
+      columnSpacing: breadth,
       columns: const <DataColumn>[
-        DataColumn(label: Expanded(
-          child: Text('Place', style: TextStyle(fontWeight: FontWeight.bold),),
-        )),
-        DataColumn(label: Expanded(
-          child: Text('Item 1', style: TextStyle(fontWeight: FontWeight.bold),),
-        )),
-        DataColumn(label: Expanded(
-          child: Text('Item 2', style: TextStyle(fontWeight: FontWeight.bold),),
-        )),
+        DataColumn(label: Text('Place', style: TextStyle(fontWeight: FontWeight.bold),)),
+        DataColumn(label: Text('Item 1', style: TextStyle(fontWeight: FontWeight.bold),)),
+        DataColumn(label: Text('Item 2', style: TextStyle(fontWeight: FontWeight.bold),)),
+        DataColumn(label: Text('', style: TextStyle(fontWeight: FontWeight.bold),)),
       ],
       rows:  foodList.map((item) => DataRow(
               cells: <DataCell>[
-              DataCell(Text(item.ladyFoodPlace.toString())),
-              DataCell(Text(item.ladyFoodItem1.toString())),
-              DataCell(Text(item.ladyFoodItem2.toString()))
+              DataCell(Text(item.ladyFoodPlace.toString(), style: const TextStyle(fontSize: 12.0),)),
+              DataCell(Text(item.ladyFoodItem1.toString(), style: const TextStyle(fontSize: 12.0),)),
+              DataCell(Text(item.ladyFoodItem2.toString(), style: const TextStyle(fontSize: 12.0),)),
+              DataCell(IconButton(onPressed: ()=> FoodRepositoryImpl().deleteFood(item.documentID.toString()), icon: const Icon(Icons.delete, size: 18,)),)
               ],),).toList(),
     );
   }
@@ -160,17 +172,20 @@ class MusicTable extends StatelessWidget {
 
       columns: const <DataColumn>[
         DataColumn(
-          label: Expanded(flex: 1,child: Text('Artist', style: TextStyle(fontWeight: FontWeight.bold)),),
+          label: Text('Artist', style: TextStyle(fontWeight: FontWeight.bold)),
 
         ),
-        DataColumn(label: Expanded(flex: 1,
-          child: Text('Song', textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
-        ))
+        DataColumn(label: Text('Song', textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),)
+        ),
+        DataColumn(
+            label: Text('', style: TextStyle(fontWeight: FontWeight.bold))
+        )
       ],
       rows:  musicList.map((item) => DataRow(
         cells: <DataCell>[
-          DataCell(Text(item.musicArtist.toString())),
-          DataCell(Text(item.musicSongName.toString())),
+          DataCell(Text(item.musicArtist.toString(), style: const TextStyle(fontSize: 12.0),)),
+          DataCell(Text(item.musicSongName.toString(), style: const TextStyle(fontSize: 12.0),)),
+          DataCell(IconButton(onPressed: ()=> MusicRepositoryImpl().deleteMusic(item.documentID.toString()), icon: const Icon(Icons.delete, size: 18,)),)
         ],),).toList(),
     );
   }

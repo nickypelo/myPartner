@@ -13,9 +13,8 @@ class PersonalityRepositoryImpl extends PersonalityRepository{
   }
 
   @override
-  Future<void> deletePersonality(String docID) {
-    // TODO: implement deletePersonality
-    throw UnimplementedError();
+  Future<void> deletePersonality(String docID) async{
+    await personalityCollection.doc(docID).delete();
   }
 
   @override

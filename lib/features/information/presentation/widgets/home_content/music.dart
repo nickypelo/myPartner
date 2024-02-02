@@ -12,7 +12,6 @@ class Music extends StatelessWidget {
 
     final musicRecommended = music.where((item) => item.musicWho == 'guy').toList();
     final musicHers = music.where((item) => item.musicWho == 'lady').toList();
-
     return Accordion(
         children: [
           AccordionSection(

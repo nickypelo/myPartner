@@ -9,7 +9,7 @@ import '../../../../authentication/data/models/user.dart';
 class MusicUpdate extends StatefulWidget {
   const MusicUpdate({super.key, required this.who});
 
-  final String? who;
+  final String who;
   @override
   State<MusicUpdate> createState() => _MusicUpdateState();
 }

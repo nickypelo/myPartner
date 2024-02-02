@@ -13,9 +13,8 @@ class MusicRepositoryImpl extends MusicRepository{
   }
 
   @override
-  Future<void> deleteMusic(String docID) {
-    // TODO: implement deleteMusic
-    throw UnimplementedError();
+  Future<void> deleteMusic(String docID) async{
+    await musicCollection.doc(docID).delete();
   }
 
   @override

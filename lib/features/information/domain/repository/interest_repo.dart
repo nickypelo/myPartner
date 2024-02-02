@@ -12,5 +12,5 @@ abstract class InterestRepository{
   Future<void> updateInterest(String uid, InterestModel interest);
 
   // DELETE: remove an interest
-  Future<void> deleteHighlight(String docID);
+  Future<void> deleteInterest(String docID);
 }

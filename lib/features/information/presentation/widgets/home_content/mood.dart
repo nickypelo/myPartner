@@ -59,6 +59,7 @@ class Mood extends StatelessWidget {
   }
 }
 
+
 class Block extends StatelessWidget {
   const Block({super.key, required this.label, required this.picture, required this.text, required this.myLady, required this.myDude});
 
@@ -75,13 +76,14 @@ class Block extends StatelessWidget {
     // message Provider
     final messageProvider = Provider.of<MessageProvider>(context);
 
+
     return Container(
       width: size,
       color: Colors.green.withOpacity(0.8),
       child: GestureDetector(
         onTap: () async{
           messageProvider.message = text;
-          await FirebaseApi().sendPushMessage('efxzQQJWRD6mkyEByjzXeo:APA91bEdpsv_STy7nKcJa-magDokzaqZFwnrExpGLY_XLVyhHkZOFBaYVl6kPykLt_h9Gi6mhkzHczpR17xDZrHuU7oEOoGiRYlWuCrgcAayu4pyF5C7WJGn03FQ_T4ZScUaXT9ruidy', '${myDude.firstname}, $text', "${myLady.firstname.toString()}'s mood");
+          await FirebaseApi().sendPushMessage(myDude.fcmToken.toString(), '${myDude.firstname}, $text', "${myLady.firstname.toString()}'s mood");
           FirebaseMessaging.onMessage.listen((RemoteMessage message) {
             // Access the broadcast message here
             NotificationService().sendNotification(1, message.data['title'], message.data['body']);

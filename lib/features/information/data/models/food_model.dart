@@ -10,15 +10,9 @@ class FoodModel extends FoodEntity{
   String? ladyFoodItem1;
   @override
   String? ladyFoodItem2;
+  String? documentID;
 
-  FoodModel({this.foodID, this.ladyFoodItem1, this.ladyFoodItem2, this.ladyFoodPlace});
-
-  FoodModel.fromJson(Map<String, dynamic>json){
-    foodID: json['foodID'];
-    ladyFoodPlace : json['ladyFoodPlace'];
-    ladyFoodItem1: json['ladyFoodItem1'];
-    ladyFoodItem2: json['ladyFoodItem2'];
-  }
+  FoodModel({this.documentID, this.foodID, this.ladyFoodItem1, this.ladyFoodItem2, this.ladyFoodPlace});
 
   FoodModel copyWith({
     String? foodID,
@@ -45,6 +39,7 @@ class FoodModel extends FoodEntity{
 
   factory FoodModel.fromDocument(DocumentSnapshot doc) {
     return FoodModel(
+      documentID: doc.id,
       foodID: doc.get('foodId'),
       ladyFoodPlace: doc.get('ladyFoodPlace'),
       ladyFoodItem1: doc.get('ladyFoodItem1'),

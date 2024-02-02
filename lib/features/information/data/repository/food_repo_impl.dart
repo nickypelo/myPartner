@@ -13,9 +13,8 @@ class FoodRepositoryImpl extends FoodRepository{
   }
 
   @override
-  Future<void> deleteFood(String docID) {
-    // TODO: implement deleteFood
-    throw UnimplementedError();
+  Future<void> deleteFood(String docID) async{
+    await foodCollection.doc(docID).delete();
   }
 
   @override

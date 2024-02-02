@@ -13,9 +13,8 @@ class InterestRepositoryImpl extends InterestRepository{
   }
 
   @override
-  Future<void> deleteHighlight(String docID) {
-    // TODO: implement deleteHighlight
-    throw UnimplementedError();
+  Future<void> deleteInterest(String docID) async {
+    await interestCollection.doc(docID).delete();
   }
 
   @override
