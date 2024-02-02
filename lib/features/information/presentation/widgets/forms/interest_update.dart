@@ -1,9 +1,10 @@
+import 'package:MyPartner/features/information/data/models/interest_model.dart';
+import 'package:MyPartner/features/information/data/repository/interest_repo_impl.dart';
 import 'package:flutter/material.dart';
 
 import 'package:provider/provider.dart';
 
 import '../../../../authentication/data/models/user.dart';
-import '../../../data/repository/interest_repo.dart';
 
 class InterestUpdate extends StatefulWidget {
   const InterestUpdate({super.key});
@@ -44,7 +45,8 @@ class _InterestUpdateState extends State<InterestUpdate> {
                     ),
                     onPressed: () async {
                       if(_formKey.currentState!.validate()){
-                        await InterestRepo(uid: user.uid).createInterestData( _ladyInterest);
+                        InterestModel item = InterestModel(interestID: user.uid, ladyInterest: _ladyInterest);
+                        await InterestRepositoryImpl().addInterest(item);
                         Navigator.pop(context);
                       }
                     },
@@ -64,8 +66,6 @@ class _InterestUpdateState extends State<InterestUpdate> {
                 });
               },
             ),
-
-
           ],
         ),
       ),

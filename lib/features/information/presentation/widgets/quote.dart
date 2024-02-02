@@ -32,6 +32,13 @@ class _QuoteState extends State<Quote> {
   }
 
   @override
+  void dispose() {
+    super.dispose();
+    verse;
+    verseText;
+  }
+
+  @override
   Widget build(BuildContext context) {
     return Column(
       children: <Widget>[

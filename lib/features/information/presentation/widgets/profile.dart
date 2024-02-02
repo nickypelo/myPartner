@@ -1,25 +1,48 @@
+import 'dart:typed_data';
 import 'dart:ui';
+import 'dart:io';
+
 
 import 'package:flutter/material.dart';
+import 'package:image_picker/image_picker.dart';
 import 'package:provider/provider.dart';
 
 import '../../../authentication/data/models/user_details.dart';
 import '../../data/models/lady_model.dart';
 
 
-class Profile extends StatelessWidget {
+class Profile extends StatefulWidget {
   const Profile({super.key, required this.myLady, required this.myDude});
 
   final UserDetailsModel myLady;
   final UserDetailsModel myDude;
 
   @override
+  State<Profile> createState() => _ProfileState();
+}
+
+class _ProfileState extends State<Profile> {
+
+  Uint8List? _myImage;
+
+  File? _selectedImage1;
+
+  Future _pickImageFromGallery() async {
+    final returnedImage = await ImagePicker().pickImage(source: ImageSource.gallery);
+
+    setState((){
+      _selectedImage1 = File(returnedImage!.path);
+      _myImage = File(returnedImage.path).readAsBytesSync();
+    });
+  }
+  @override
   Widget build(BuildContext context) {
-    // access data
+
+        // access data
     final ladyDetails = Provider.of<List<LadyModel>>(context);
     LadyModel ladyDisplay;
 
-    int specific = ladyDetails.indexWhere((element) => element.userID == myDude.userID);
+    int specific = ladyDetails.indexWhere((element) => element.userID == widget.myDude.userID);
     ladyDisplay = ladyDetails[specific];
 
     //sizes
@@ -46,17 +69,38 @@ class Profile extends StatelessWidget {
                       width: MediaQuery.of(context).size.width * .5,
                       height: 80,
                       child:  ListTile(
-                        title: Text(myLady.firstname.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
-                        subtitle: Text(myLady.lastname.toString(), style:  const TextStyle(color: Colors.white),),
+                        title: Text(widget.myLady.firstname.toString(), style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20.0, color: Colors.white)),
+                        subtitle: Text(widget.myLady.lastname.toString(), style:  const TextStyle(color: Colors.white),),
                         ),
                       ),
                   ),
-                  const Expanded(
-                    flex: 1,
-                    child: CircleAvatar(
-                      // backgroundColor: Colors.black,
-                      backgroundImage: AssetImage('assets/profile.png'),
-                      radius: 42,
+                  GestureDetector(
+                    onLongPress: () async{
+                      showDialog(
+                          context: context,
+                          builder: (context){
+                            return AlertDialog(
+                              title: const Text('Change your avatar'),
+                              content: ElevatedButton(
+                                onPressed: ()=> _pickImageFromGallery(),
+                                child: const Text('Select from gallery'),
+                              ),
+                              actions: [
+                                TextButton(
+                                    onPressed: ()=> Navigator.pop(context),
+                                    child: const Text('Done!'))
+                              ],
+                            );
+                          }
+                        );
+                    },
+                    child: const Expanded(
+                      flex: 1,
+                      child: CircleAvatar(
+                        // backgroundColor: Colors.black,
+                        backgroundImage: AssetImage('assets/profile.png'),
+                        radius: 42,
+                      ),
                     ),
                   ),
                 ],
@@ -77,7 +121,7 @@ class Profile extends StatelessWidget {
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
                             RichTxt(label: 'Birthday', user: ladyDisplay.ladyBirthDate.toString()),
-                            RichTxt(label: 'Partner', user: ('${myDude.firstname} ${myDude.lastname}')),
+                            RichTxt(label: 'Partner', user: ('${widget.myDude.firstname} ${widget.myDude.lastname}')),
                             RichTxt(label: 'Anniversary', user: ladyDisplay.anniversaryDate.toString())
                           ],
                         ),

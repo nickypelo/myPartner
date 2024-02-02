@@ -1,4 +1,9 @@
+import 'package:MyPartner/features/information/data/models/personality_model.dart';
+import 'package:MyPartner/features/information/data/repository/personality_repo_impl.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+
+import '../../../../authentication/data/models/user.dart';
 
 class PersonalityUpdate extends StatefulWidget {
   const PersonalityUpdate({super.key});
@@ -11,11 +16,14 @@ class _PersonalityUpdateState extends State<PersonalityUpdate> {
   final _formKey = GlobalKey<FormState>();
 
   // text field state
-  String ladyPersonalityDescription = '';
+  String _ladyPersonalityDescription = '';
   String error = '';
 
   @override
   Widget build(BuildContext context) {
+    // access user
+    final user = Provider.of<AppUser>(context);
+
     return Container(
       color: Colors.purple[50],
       padding: const EdgeInsets.all(16.0),
@@ -35,7 +43,11 @@ class _PersonalityUpdateState extends State<PersonalityUpdate> {
                         backgroundColor: Colors.purple
                     ),
                     onPressed: () async {
-                      if(_formKey.currentState!.validate()){}
+                      if(_formKey.currentState!.validate()){
+                        PersonalityModel item = PersonalityModel(personalityID: user.uid, ladyPersonalityDescription: _ladyPersonalityDescription);
+                        await PersonalityRepositoryImpl().addMusic(item);
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text('Add', style: TextStyle(color: Colors.white,))),
               ],
@@ -51,12 +63,10 @@ class _PersonalityUpdateState extends State<PersonalityUpdate> {
               },
               onChanged: (value){
                 setState(() {
-                  ladyPersonalityDescription = value;
+                  _ladyPersonalityDescription = value;
                 });
               },
             ),
-
-
           ],
         ),
       ),

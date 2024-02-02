@@ -1,3 +1,5 @@
+import 'package:MyPartner/features/information/data/models/highlight_model.dart';
+import 'package:MyPartner/features/information/data/repository/highlight_repo_impl.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -42,7 +44,11 @@ class _HighlightUpdateState extends State<HighlightUpdate> {
                         backgroundColor: Colors.purple
                     ),
                     onPressed: () async {
-                      if(_formKey.currentState!.validate()){}
+                      if(_formKey.currentState!.validate()){
+                        HighlightModel item =  HighlightModel(highlightID: user.uid, ladyHighlight: ladyHighlight);
+                        await HighlightRepositoryImpl().addHighlight(item);
+                        Navigator.pop(context);
+                      }
                     },
                     child: const Text('Add', style: TextStyle(color: Colors.white,))),
               ],

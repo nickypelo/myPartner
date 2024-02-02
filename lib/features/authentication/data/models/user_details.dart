@@ -1,4 +1,6 @@
 
+import 'package:cloud_firestore/cloud_firestore.dart';
+
 import '../../domain/entities/user_entity.dart';
 
 class UserDetailsModel extends UserDetailsEntity{
@@ -34,8 +36,7 @@ class UserDetailsModel extends UserDetailsEntity{
       fcmToken: fcmToken
     );
 
-  @override
-  Map<String, dynamic> userDetailsMap(){
+  Map<String, dynamic> toJson(){
     return {
       'userID': userID,
       'firstname': firstname,
@@ -45,4 +46,16 @@ class UserDetailsModel extends UserDetailsEntity{
       'fcmToken' : fcmToken
     };
   }
+
+  factory UserDetailsModel.fromDocument(DocumentSnapshot doc) {
+    return UserDetailsModel(
+      userID: doc.get('userID'),
+      firstname: doc.get('firstname'),
+      lastname: doc.get('lastname'),
+      partnerEmail: doc.get('partnerEmail'),
+      role: doc.get('role'),
+      fcmToken: doc.get('fcmToken'),
+    );
+  }
+
 }

@@ -1,3 +1,5 @@
+import 'package:MyPartner/features/information/data/repository/lady_repo_impl.dart';
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -5,7 +7,6 @@ import 'package:provider/provider.dart';
 
 import '../../../../core/shared/loading.dart';
 import '../../../information/data/models/lady_model.dart';
-import '../../../information/data/repository/lady_repo.dart';
 import '../../data/models/relationship_model.dart';
 import '../../data/models/user_details.dart';
 import '../../data/repository/auth_service.dart';
@@ -137,7 +138,7 @@ class _RegisterState extends State<Register> {
                           const SizedBox(height: 20.0,),
                           TextFormField(
                             decoration: InputDecoration(
-                                hintText: "Your lady's birthdate: e.g. 1 April",
+                                hintText: "Your lady's birthdate: e.g. 3 January",
                                 filled: true,
                                 fillColor: Colors.purple[50]
                             ),
@@ -153,7 +154,7 @@ class _RegisterState extends State<Register> {
                           const SizedBox(height: 20.0,),
                           TextFormField(
                             decoration: InputDecoration(
-                                hintText: "Your Anniversary: e.g. 30 December",
+                                hintText: "Your Anniversary: e.g. 3 January",
                                 filled: true,
                                 fillColor: Colors.purple[50]
                             ),
@@ -242,7 +243,7 @@ class _RegisterState extends State<Register> {
                                     lastname: _lastName,
                                     role: data['role'],
                                     partnerEmail: _partnerEmail,
-                                    fcmToken: '1'
+                                    fcmToken: await FirebaseMessaging.instance.getToken()
                                 );
                                 RelationshipModel couple = RelationshipModel(
                                     boyfriend: email,
@@ -254,10 +255,10 @@ class _RegisterState extends State<Register> {
                                   ladyBirthDate: _ladyBirthDate,
                                 );
 
-                                UserDetailsRepoImpl().addUserDetails(item);
+                                UserDetailsRepoImpl().addUser(item);
                                 if(data['role'] == 'guy'){
-                                  RelationshipRepoImpl().addRelationship(couple);
-                                  LadyRepo(uid: result.uid).createLadyData(myLady);
+                                  RelationshipRepositoryImpl().addRelationship(couple);
+                                  LadyRepositoryImpl().addLady(myLady);
                                 }
                                   Navigator.pushReplacementNamed(context, '/');
                               }

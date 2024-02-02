@@ -5,8 +5,8 @@ import 'package:firebase_core/firebase_core.dart';
 import 'core/util/app_providers.dart';
 import 'core/util/app_routes.dart';
 import 'features/information/data/data_sources/api/local_notifications.dart';
+import 'features/information/data/data_sources/apo_firebase.dart';
 import 'firebase_options.dart';
-import 'package:provider/provider.dart';
 
 // local imports
 
@@ -17,7 +17,7 @@ void main() async {
     options: DefaultFirebaseOptions.currentPlatform,
   );
   await NotificationService().initialNotification();
-  // await FirebaseApi().initializeNotifications();
+  await FirebaseApi().initializeNotifications();
   runApp(const MyApp());
 }
 
@@ -27,17 +27,16 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-    return MultiProvider(
-      providers: appProviders,
-      child: MaterialApp(
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
+    return AppProviders(
+        child: MaterialApp(
+            title: 'Flutter Demo',
+            theme: ThemeData(
+              colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+              useMaterial3: true,
+            ),
+            debugShowCheckedModeBanner: false,
+            routes: routes
         ),
-        debugShowCheckedModeBanner: false,
-        routes: routes
-      ),
     );
   }
 }

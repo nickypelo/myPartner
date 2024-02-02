@@ -1,13 +1,20 @@
+import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/material.dart';
 
 //3rd party imports
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:provider/provider.dart';
 
+import '../../../../authentication/data/models/user_details.dart';
+import '../../../data/data_sources/api/local_notifications.dart';
+import '../../../data/data_sources/apo_firebase.dart';
 import '../../provider/notification_provider.dart';
 
 class Mood extends StatelessWidget {
-  const Mood({super.key});
+  const Mood({super.key, required this.myLady, required this.myDude});
+
+  final UserDetailsModel myLady;
+  final UserDetailsModel myDude;
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +47,7 @@ class Mood extends StatelessWidget {
               items: feelings.map((i) {
                 return Builder(
                   builder: (BuildContext context) {
-                    return Block(label: i.label, picture: i.picture, text: i.text);
+                    return Block(label: i.label, picture: i.picture, text: i.text, myDude: myDude, myLady: myLady,);
                   },
                 );
               }).toList(),
@@ -52,13 +59,15 @@ class Mood extends StatelessWidget {
   }
 }
 
-
 class Block extends StatelessWidget {
-  const Block({super.key, required this.label, required this.picture, required this.text});
+  const Block({super.key, required this.label, required this.picture, required this.text, required this.myLady, required this.myDude});
 
   final String label;
   final String picture;
   final String text;
+  final UserDetailsModel myLady;
+  final UserDetailsModel myDude;
+
   @override
   Widget build(BuildContext context) {
     double size = MediaQuery.of(context).size.width * 0.18;
@@ -66,13 +75,18 @@ class Block extends StatelessWidget {
     // message Provider
     final messageProvider = Provider.of<MessageProvider>(context);
 
-
     return Container(
       width: size,
       color: Colors.green.withOpacity(0.8),
       child: GestureDetector(
-        onTap: (){
+        onTap: () async{
           messageProvider.message = text;
+          await FirebaseApi().sendPushMessage('efxzQQJWRD6mkyEByjzXeo:APA91bEdpsv_STy7nKcJa-magDokzaqZFwnrExpGLY_XLVyhHkZOFBaYVl6kPykLt_h9Gi6mhkzHczpR17xDZrHuU7oEOoGiRYlWuCrgcAayu4pyF5C7WJGn03FQ_T4ZScUaXT9ruidy', '${myDude.firstname}, $text', "${myLady.firstname.toString()}'s mood");
+          FirebaseMessaging.onMessage.listen((RemoteMessage message) {
+            // Access the broadcast message here
+            NotificationService().sendNotification(1, message.data['title'], message.data['body']);
+            messageProvider.message = message.data['body'];
+          });
         },
         child: Center(
           child: Column(

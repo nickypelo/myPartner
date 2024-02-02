@@ -8,10 +8,5 @@ class RelationshipEntity{
       this.girlfriend
     }
   );
-  Map<String, dynamic> relationshipMap(){
-    return {
-      'boyfriend': boyfriend,
-      'girlfriend': girlfriend,
-    };
-  }
+
 }

@@ -17,15 +17,4 @@ class UserDetailsEntity{
         this.fcmToken
       }
     );
-
-  Map<String, dynamic> userDetailsMap(){
-    return {
-      'userID': userID,
-      'firstname': firstname,
-      'lastname': lastname,
-      'partnerEmail': partnerEmail,
-      'role': role,
-      'fcmToken' : fcmToken
-    };
-  }
 }

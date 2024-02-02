@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 class MoodInfo extends StatefulWidget {
   const MoodInfo({super.key});
 
+
   @override
   State<MoodInfo> createState() => _MoodInfoState();
 }
@@ -41,15 +42,15 @@ class _MoodInfoState extends State<MoodInfo> {
         height: MediaQuery.of(context).size.height,
         child: value == ''
               ? const Text('')
-              : value == 'I feel sad.'
+              : value.contains('sad')
               ? const Sad()
-              : value == 'I want your attention.'
+              : value.contains('attention')
               ? const Alone()
-              : value == 'I wanna rock your world.'
+              : value.contains('world')
               ? const Spicy()
-              : value == 'I feel sick'
+              : value.contains('sick')
               ? const Sick()
-              : value == 'I want to Vent!'
+              : value.contains('Vent!')
               ? const Vent()
               : const Text('She feels happy.')
         ,
@@ -62,15 +63,26 @@ class _MoodInfoState extends State<MoodInfo> {
 // spicy suggestion
 class Spicy extends StatelessWidget {
   const Spicy({super.key});
+
   @override
   Widget build(BuildContext context) {
+
+    final List<String> suggestion = ['Prepare yourself.', 'Get some wine.', 'Do not talk about work.'];
+
     return Column(
       children: [
         Text('Spicy', style: TextStyle(color: Colors.red[200], fontWeight: FontWeight.bold, fontSize: 16.0),),
-        const SizedBox(height: 22.0,),
-        const Text('- Prepare yourself.'),
-        const Text('- Get some wine.'),
-        const Text('- Do not talk about work.'),
+        ListView.builder(
+          shrinkWrap: true,
+          itemCount: suggestion.length,
+          itemBuilder: (context, index){
+            return ListTile(
+              contentPadding: const EdgeInsets.all(0),
+              dense: true,
+              leading: const Text('-'),
+              title: Text(suggestion[index]),
+            );
+          })
       ],
     );
   }
@@ -82,13 +94,24 @@ class Sad extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<String> suggestion = ['Get her food.', 'Endless Hugs.', 'Get her something.'];
+
     return Column(
       children: [
         Text('Sad', style: TextStyle(color: Colors.red[200], fontWeight: FontWeight.bold, fontSize: 16.0),),
         const SizedBox(height: 22.0,),
-        const Text('- Get her food.'),
-        const Text('- Endless Hugs.'),
-        const Text('- Get her something.'),
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: suggestion.length,
+            itemBuilder: (context, index){
+              return ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                dense: true,
+                leading: const Text('-'),
+                title: Text(suggestion[index]),
+              );
+            })
       ],
     );
   }
@@ -100,15 +123,24 @@ class Alone extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<String> suggestion = ['Schedule a date.', 'Take a walk with her.', 'Endless Hugs.', 'Talk to her about stuff you like and stuff she likes.', 'Watch a movie together.'];
+
     return Column(
       children: [
         Text('Alone', style: TextStyle(color: Colors.red[200], fontWeight: FontWeight.bold, fontSize: 16.0),),
         const SizedBox(height: 22.0,),
-        const Text('- Schedule a date.'),
-        const Text('- Take a walk with her.'),
-        const Text('- Endless Hugs.'),
-        const Text('- Talk to her about stuff you like and stuff she likes.'),
-        const Text('- Watch a movie together.'),
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: suggestion.length,
+            itemBuilder: (context, index){
+              return ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                dense: true,
+                leading: const Text('-'),
+                title: Text(suggestion[index]),
+              );
+            })
       ],
     );
   }
@@ -120,13 +152,24 @@ class Sick extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<String> suggestion = ['Check up on her.', 'Make her a home remedy.', 'Check if you can go to a doctor with her.'];
+
     return Column(
       children: [
         Text('Sick', style: TextStyle(color: Colors.red[200], fontWeight: FontWeight.bold, fontSize: 16.0),),
         const SizedBox(height: 22.0,),
-        const Text('- Check up on her.'),
-        const Text('- Make her a home remedy.'),
-        const Text('- Check if you can go to a doctor with her.'),
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: suggestion.length,
+            itemBuilder: (context, index){
+              return ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                dense: true,
+                leading: const Text('-'),
+                title: Text(suggestion[index]),
+              );
+            })
       ],
     );
   }
@@ -138,14 +181,24 @@ class Vent extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+
+    final List<String> suggestion = ['Listen.', 'Do not offer your thoughts.', 'Do not give advice.', 'Conclude the session with snacks and fun time.'];
+
     return Column(
       children: [
         Text('Vent', style: TextStyle(color: Colors.red[200], fontWeight: FontWeight.bold, fontSize: 16.0),),
         const SizedBox(height: 22.0,),
-        const Text('- Listen.'),
-        const Text('- Do not offer your thoughts.'),
-        const Text('- Do not give advice.'),
-        const Text('- Conclude the session with snacks and fun time.'),
+        ListView.builder(
+            shrinkWrap: true,
+            itemCount: suggestion.length,
+            itemBuilder: (context, index){
+              return ListTile(
+                contentPadding: const EdgeInsets.all(0),
+                dense: true,
+                leading: const Text('-'),
+                title: Text(suggestion[index]),
+              );
+            })
       ],
     );
   }

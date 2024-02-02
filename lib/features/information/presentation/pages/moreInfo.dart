@@ -38,7 +38,7 @@ class _MoreInfoState extends State<MoreInfo> {
               : formChecker == 'about'
               ? const PersonalityUpdate()
               : formChecker == 'food'
-              ? const FoodUpdate()
+              ? FoodUpdate(foodList: data['description'])
               : const HighlightUpdate()
         );
       });
@@ -137,7 +137,7 @@ class FoodTable extends StatelessWidget {
         )),
         DataColumn(label: Expanded(
           child: Text('Item 2', style: TextStyle(fontWeight: FontWeight.bold),),
-        ))
+        )),
       ],
       rows:  foodList.map((item) => DataRow(
               cells: <DataCell>[
@@ -157,12 +157,14 @@ class MusicTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
+
       columns: const <DataColumn>[
-        DataColumn(label: Expanded(
-          child: Text('Artist', style: TextStyle(fontWeight: FontWeight.bold),),
-        )),
-        DataColumn(label: Expanded(
-          child: Text('Song', style: TextStyle(fontWeight: FontWeight.bold),),
+        DataColumn(
+          label: Expanded(flex: 1,child: Text('Artist', style: TextStyle(fontWeight: FontWeight.bold)),),
+
+        ),
+        DataColumn(label: Expanded(flex: 1,
+          child: Text('Song', textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),),
         ))
       ],
       rows:  musicList.map((item) => DataRow(

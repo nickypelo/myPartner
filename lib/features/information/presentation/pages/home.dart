@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 //3rd party packages
 import 'package:accordion/accordion.dart';
 
-
 // local imports
 
 import 'package:provider/provider.dart';
@@ -16,6 +15,7 @@ import '../../data/models/highlight_model.dart';
 import '../../data/models/interest_model.dart';
 import '../../data/models/music_model.dart';
 import '../../data/models/personality_model.dart';
+import '../provider/notification_provider.dart';
 import '../widgets/home_content/about.dart';
 import '../widgets/home_content/food.dart';
 import '../widgets/home_content/hightlight.dart';
@@ -48,6 +48,9 @@ class _HomePageState extends State<HomePage> {
     // establish users
     UserDetailsModel current = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
     UserDetailsModel myLady = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
+
+    // UserDetailsModel current2 = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
+    // UserDetailsModel myLady2 = UserDetailsModel(userID: '', firstname: '', lastname: '', partnerEmail: '', role: '', fcmToken: '');
 
 
     bool isUser = userDetails.indexWhere((element) => element.userID == user?.uid) != -1;
@@ -95,7 +98,6 @@ class _HomePageState extends State<HomePage> {
     List<HighlightModel> highlightDisplay = highlight.where((item) => item.highlightID == current.userID || item.highlightID == myLady.userID).toList();
     List<InterestModel> interestDisplay = interest.where((item) => item.interestID == current.userID || item.interestID == myLady.userID).toList();
 
-
     return Scaffold(
         backgroundColor: const Color(0xFF7169B4),
       floatingActionButton: FloatingActionButton(
@@ -103,7 +105,7 @@ class _HomePageState extends State<HomePage> {
           child: const Text('logout', style: TextStyle(color: Colors.white),),
           onPressed: () async{
             await HomePage._auth.logoff();
-          }
+        }
       ),
       body: SingleChildScrollView(
         child: SafeArea(
@@ -119,7 +121,7 @@ class _HomePageState extends State<HomePage> {
                 const SizedBox(height: 8.0,),
                 Profile(myLady: userDetails[index], myDude: userDetails[partnerIndex]),
                 const SizedBox(height: 8.0,),
-                const Mood(),
+                Mood(myLady: userDetails[index], myDude: userDetails[partnerIndex]),
                 // const SizedBox(height: 15.0,),
                 Accordion(
                   children: [
@@ -139,7 +141,7 @@ class _HomePageState extends State<HomePage> {
                         headerBorderRadius: 0,
                         headerPadding: const EdgeInsets.all(8.0),
                         leftIcon: Image.asset('assets/persona.png'),
-                        header: const Header(heading: 'Personality',),
+                        header:  const Header(heading: 'Personality',),
                         content: Personality(personality: personalityDisplay.isEmpty ? [PersonalityModel(ladyPersonalityDescription: '', personalityID: '0')] : personalityDisplay,)
                     ),
                     AccordionSection(
@@ -180,7 +182,7 @@ class _HomePageState extends State<HomePage> {
                     ),
                   ],
                 ),
-                const SizedBox(height: 20.0,),
+                const SizedBox(height: 50.0,),
               ],
             ),
           ),
