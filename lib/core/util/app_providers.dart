@@ -33,7 +33,7 @@ class AppProviders extends StatelessWidget {
     return MultiProvider(
       providers: [
         StreamProvider<AppUser?>.value(value: AuthService().user,initialData: null,catchError: (_,__){return null;},),
-        StreamProvider(create: (context) => foodCollectionProvider(context), initialData: [FoodModel(foodID: '', ladyFoodPlace: '', ladyFoodItem1: '', ladyFoodItem2: '')]),
+        StreamProvider(create: (context) => foodCollectionProvider(context), initialData: [FoodModel(foodID: '', ladyFoodType: '', ladyFoodItem1: '', ladyFoodItem2: '')]),
         StreamProvider(create: (context) => highlightCollectionProvider(context), initialData: [HighlightModel(highlightID: '', ladyHighlight: '')]),
         StreamProvider(create: (context) => interestCollectionProvider(context), initialData: [InterestModel(interestID: '', ladyInterest: '')]),
         StreamProvider(create: (context) => ladyCollectionProvider(context), initialData: [LadyModel(userID: '', ladyBirthDate: '', anniversaryDate: '')]),

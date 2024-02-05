@@ -15,9 +15,10 @@ class Food extends StatelessWidget {
     return Column(
       children: <Widget>[
         DataTable(
+          columnSpacing: MediaQuery.of(context).size.width * .08,
         columns: const <DataColumn>[
           DataColumn(label: Expanded(
-            child: Text('Place', style: TextStyle(fontWeight: FontWeight.bold),),
+            child: Text('Type', style: TextStyle(fontWeight: FontWeight.bold),),
           )),
           DataColumn(label: Expanded(
             child: Text('Item 1', style: TextStyle(fontWeight: FontWeight.bold),),
@@ -28,7 +29,7 @@ class Food extends StatelessWidget {
         ],
         rows:  foodDisplay.map((item) => DataRow(
           cells: <DataCell>[
-            DataCell(Text(item.ladyFoodPlace.toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
+            DataCell(Text(item.ladyFoodType.toString(), style: const TextStyle(fontWeight: FontWeight.bold),)),
             DataCell(Text(item.ladyFoodItem1.toString())),
             DataCell(Text(item.ladyFoodItem2.toString()))
           ],),).toList(),

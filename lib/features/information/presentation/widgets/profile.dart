@@ -91,12 +91,19 @@ class _ProfileState extends State<Profile> {
                           }
                         );
                     },
-                    child: const CircleAvatar(
+                    child: _selectedImage1 == null
+                        ? const CircleAvatar(
                       // backgroundColor: Colors.black,
-                      backgroundImage: AssetImage('assets/profile.png'),
+                          backgroundImage: AssetImage('assets/profile.png'),
+                          radius: 42,
+                    )
+                        :
+                     CircleAvatar(
+                      // backgroundColor: Colors.black,
+                      backgroundImage: MemoryImage(_myImage!),
                       radius: 42,
-                    ),
                   ),
+                  )
                 ],
               ),
               const SizedBox(height: 8.0,),

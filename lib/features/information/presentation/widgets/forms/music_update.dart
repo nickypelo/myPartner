@@ -10,18 +10,20 @@ class MusicUpdate extends StatefulWidget {
   const MusicUpdate({super.key, required this.who});
 
   final String who;
+
   @override
   State<MusicUpdate> createState() => _MusicUpdateState();
 }
 
 class _MusicUpdateState extends State<MusicUpdate> {
-  final _formKey = GlobalKey<FormState>();
-
   // text field state
   String _musicArtist = '';
+
   String _musicSongName = '';
+
   String error = '';
 
+  final _formKey = GlobalKey<FormState>();
   @override
   Widget build(BuildContext context) {
     // access user

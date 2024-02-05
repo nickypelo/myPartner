@@ -244,7 +244,7 @@ class _GuyHomeState extends State<GuyHome> {
                             padding: const EdgeInsets.all(8.0),
                             height: screenHeight * 0.3,
                             color: Colors.deepOrange,
-                            child: const Center(child: Text('MUSIC', style: TextStyle(fontSize: 16.0,  fontWeight: FontWeight.bold)))),
+                            child: const Center(child: Text('MUSIC', style: TextStyle(fontSize: 14.0,  fontWeight: FontWeight.bold)))),
                       )
                   ),
                   const SizedBox(width: 10.0,),
@@ -265,7 +265,7 @@ class _GuyHomeState extends State<GuyHome> {
                                     padding: const EdgeInsets.all(8.0),
                                     width: breadth * 0.5,
                                     color: Colors.indigo,
-                                    child: const Center(child: Text('FOOD', style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)))),
+                                    child: const Center(child: Text('FOOD', style: TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.bold)))),
                               )
                           ),
                           const SizedBox(height: 10.0,),
@@ -283,7 +283,7 @@ class _GuyHomeState extends State<GuyHome> {
                                     padding: const EdgeInsets.all(8.0),
                                     width: breadth * 0.5,
                                     color: Colors.amber,
-                                    child: const Center(child: Text('WHAT YOU LIKE ABOUT HER', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,))),
+                                    child: const Center(child: Text('WHAT YOU LIKE ABOUT HER', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold), textAlign: TextAlign.center,))),
                               )
                           ),
                         ],
@@ -314,7 +314,7 @@ class _GuyHomeState extends State<GuyHome> {
                                     padding: const EdgeInsets.all(8.0),
                                     width: breadth * 0.5,
                                     color: Colors.amber,
-                                    child: const Center(child: Text('HER PERSONALITY', style: TextStyle(fontSize: 16.0, fontWeight: FontWeight.bold)))),
+                                    child: const Center(child: Text('HER PERSONALITY', style: TextStyle(fontSize: 14.0, fontWeight: FontWeight.bold)))),
                               )
                           ),
                           const SizedBox(height: 10.0,),
@@ -332,7 +332,7 @@ class _GuyHomeState extends State<GuyHome> {
                                     padding: const EdgeInsets.all(8.0),
                                     width: breadth * 0.5,
                                     color: Colors.indigo,
-                                    child: const Center(child: Text('WHAT SHE LIKES?', style: TextStyle(fontSize: 16.0, color: Colors.white, fontWeight: FontWeight.bold)))),
+                                    child: const Center(child: Text('WHAT SHE LIKES?', style: TextStyle(fontSize: 14.0, color: Colors.white, fontWeight: FontWeight.bold)))),
                               )
                           ),
                         ],

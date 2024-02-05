@@ -19,7 +19,7 @@ class _FoodUpdateState extends State<FoodUpdate> {
   final _formKey = GlobalKey<FormState>();
 
   // text field state
-  String _ladyFoodPlace = '';
+  String _ladyFoodType = '';
   String _ladyFoodItem1 = '';
   String _ladyFoodItem2 = '';
   String error = '';
@@ -50,24 +50,24 @@ class _FoodUpdateState extends State<FoodUpdate> {
                       ),
                       onPressed: () async {
                         if(_formKey.currentState!.validate()){
-                          FoodModel item = FoodModel(foodID: user.uid, ladyFoodPlace: _ladyFoodPlace, ladyFoodItem1: _ladyFoodItem1, ladyFoodItem2: _ladyFoodItem2);
-                          await FoodRepositoryImpl().addFood(item);
-                          Navigator.pop(context);
+                          FoodModel item = FoodModel(foodID: user.uid, ladyFoodType: _ladyFoodType, ladyFoodItem1: _ladyFoodItem1, ladyFoodItem2: _ladyFoodItem2);
+                          FoodRepositoryImpl().addFood(item);
                         }
+                        Navigator.pop(context);
                       },
                       child: const Text('Add', style: TextStyle(color: Colors.white,))),
                 ],
               ),
               TextFormField(
                 decoration: const InputDecoration(
-                  hintText: 'Place:',
+                  hintText: 'Type:',
                 ),
                 validator: (value){
                   return value!.isEmpty ? 'Place cannot be empty!' : null;
                 },
                 onChanged: (value){
                   setState(() {
-                    _ladyFoodPlace = value;
+                    _ladyFoodType = value;
                   });
                 },
               ),

@@ -12,6 +12,7 @@ class Music extends StatelessWidget {
 
     final musicRecommended = music.where((item) => item.musicWho == 'guy').toList();
     final musicHers = music.where((item) => item.musicWho == 'lady').toList();
+
     return Accordion(
         children: [
           AccordionSection(
@@ -83,7 +84,8 @@ class YourFavorite extends StatelessWidget {
                   Navigator.pushNamed(context, '/moreInfo', arguments: {
                     'title': 'Your Favourite Music',
                     'description': songList,
-                    'name': 'music'
+                    'name': 'music',
+                    'character': 'lady'
                   });
                 },
                 child: const Text('show more'))
@@ -103,6 +105,7 @@ class Table extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
+      columnSpacing: MediaQuery.of(context).size.width * .12,
       columns: const <DataColumn>[
         DataColumn(label: Expanded(
           child: Text('Artist', style: TextStyle(fontWeight: FontWeight.bold),),

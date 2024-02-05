@@ -54,7 +54,7 @@ class _PersonalityUpdateState extends State<PersonalityUpdate> {
             ),
             TextFormField(
               maxLines: 6,
-              maxLength: 200,
+              maxLength: 1000,
               decoration: const InputDecoration(
                 hintText: 'You are ...',
               ),

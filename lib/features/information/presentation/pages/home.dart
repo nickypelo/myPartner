@@ -164,7 +164,7 @@ class _HomePageState extends State<HomePage> {
                         headerPadding: const EdgeInsets.all(8.0),
                         leftIcon: Image.asset('assets/burger.png'),
                         header: const Header(heading: 'Food',),
-                        content: Food(food: foodDisplay.isEmpty ? [FoodModel(foodID: '1', ladyFoodItem1: '', ladyFoodItem2: '', ladyFoodPlace: '')] : foodDisplay,)
+                        content: Food(food: foodDisplay.isEmpty ? [FoodModel(foodID: '1', ladyFoodItem1: '', ladyFoodItem2: '', ladyFoodType: '')] : foodDisplay,)
                     ),
                     AccordionSection(
                         headerBackgroundColor: Colors.deepPurple,

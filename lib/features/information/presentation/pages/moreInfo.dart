@@ -1,7 +1,5 @@
-import 'package:MyPartner/features/information/data/repository/food_repo_impl.dart';
 import 'package:MyPartner/features/information/data/repository/highlight_repo_impl.dart';
 import 'package:MyPartner/features/information/data/repository/interest_repo_impl.dart';
-import 'package:MyPartner/features/information/data/repository/music_repo_impl.dart';
 import 'package:flutter/material.dart';
 
 import '../../data/models/food_model.dart';
@@ -30,7 +28,6 @@ class _MoreInfoState extends State<MoreInfo> {
     data = ModalRoute.of(context)?.settings.arguments as Map<dynamic, dynamic>;
 
     String formChecker = data['name'];
-
     void showAddPanel(){
       showDialog(context: context, builder: (context){
         return Dialog(
@@ -38,7 +35,7 @@ class _MoreInfoState extends State<MoreInfo> {
               ? const InterestUpdate()
               : formChecker == 'music'
               ? MusicUpdate(who: data['character'])
-              : formChecker == 'about'
+              : formChecker == 'personality'
               ? const PersonalityUpdate()
               : formChecker == 'food'
               ? FoodUpdate(foodList: data['description'])
@@ -100,7 +97,7 @@ class _MoreInfoState extends State<MoreInfo> {
                       itemBuilder: (context, index) => ListTile(
                           contentPadding: EdgeInsets.zero,
                           dense: true,
-                          title: Text(data['description'][index].ladyInterest.toString(), style: const TextStyle(fontSize: 14.0),),
+                          title: Text('${index+1}. ${data['description'][index].ladyInterest}', style: const TextStyle(fontSize: 14.0),),
                           trailing: IconButton(onPressed: (){
                             InterestRepositoryImpl().deleteInterest(data['description'][index].documentID.toString());
                           }, icon: const Icon(Icons.delete, size: 16.0,)),
@@ -113,7 +110,7 @@ class _MoreInfoState extends State<MoreInfo> {
                       itemBuilder: (context, index) => ListTile(
                         contentPadding: EdgeInsets.zero,
                           dense: true,
-                          title: Text(data['description'][index].ladyHighlight.toString(), style: const TextStyle(fontSize: 16.0),),
+                          title: Text('${index+1}. ${data['description'][index].ladyHighlight}', style: const TextStyle(fontSize: 14.0),),
                         trailing: IconButton(onPressed: (){
                           HighlightRepositoryImpl().deleteHighlight(data['description'][index].documentID.toString());
                         }, icon: const Icon(Icons.delete, size: 16.0,)),
@@ -122,7 +119,7 @@ class _MoreInfoState extends State<MoreInfo> {
                   : ListView.builder(
                      itemCount: data['description'].length,
                      shrinkWrap: true,
-                     itemBuilder: (context, index) => Text(data['description'][index].ladyPersonalityDescription.toString(), style: const TextStyle(fontSize: 16.0),), // Wrap title in Text
+                     itemBuilder: (context, index) => Text('${data['description'][index].ladyPersonalityDescription}', style: const TextStyle(fontSize: 14.0),), // Wrap title in Text
                    ),
                 ],
           ),
@@ -140,22 +137,20 @@ class FoodTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
 
-    double breadth = MediaQuery.of(context).size.width * .09;
+    double breadth = MediaQuery.of(context).size.width * .08;
 
     return DataTable(
       columnSpacing: breadth,
       columns: const <DataColumn>[
-        DataColumn(label: Text('Place', style: TextStyle(fontWeight: FontWeight.bold),)),
+        DataColumn(label: Text('Type', style: TextStyle(fontWeight: FontWeight.bold),)),
         DataColumn(label: Text('Item 1', style: TextStyle(fontWeight: FontWeight.bold),)),
         DataColumn(label: Text('Item 2', style: TextStyle(fontWeight: FontWeight.bold),)),
-        DataColumn(label: Text('', style: TextStyle(fontWeight: FontWeight.bold),)),
       ],
       rows:  foodList.map((item) => DataRow(
               cells: <DataCell>[
-              DataCell(Text(item.ladyFoodPlace.toString(), style: const TextStyle(fontSize: 12.0),)),
+              DataCell(Text(item.ladyFoodType.toString(), style: const TextStyle(fontSize: 12.0),)),
               DataCell(Text(item.ladyFoodItem1.toString(), style: const TextStyle(fontSize: 12.0),)),
               DataCell(Text(item.ladyFoodItem2.toString(), style: const TextStyle(fontSize: 12.0),)),
-              DataCell(IconButton(onPressed: ()=> FoodRepositoryImpl().deleteFood(item.documentID.toString()), icon: const Icon(Icons.delete, size: 18,)),)
               ],),).toList(),
     );
   }
@@ -169,7 +164,7 @@ class MusicTable extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DataTable(
-
+      columnSpacing: MediaQuery.of(context).size.width * .12,
       columns: const <DataColumn>[
         DataColumn(
           label: Text('Artist', style: TextStyle(fontWeight: FontWeight.bold)),
@@ -177,15 +172,15 @@ class MusicTable extends StatelessWidget {
         ),
         DataColumn(label: Text('Song', textAlign: TextAlign.center,style: TextStyle(fontWeight: FontWeight.bold),)
         ),
-        DataColumn(
-            label: Text('', style: TextStyle(fontWeight: FontWeight.bold))
-        )
+        // DataColumn(
+        //     label: Text('', style: TextStyle(fontWeight: FontWeight.bold))
+        // )
       ],
       rows:  musicList.map((item) => DataRow(
         cells: <DataCell>[
           DataCell(Text(item.musicArtist.toString(), style: const TextStyle(fontSize: 12.0),)),
           DataCell(Text(item.musicSongName.toString(), style: const TextStyle(fontSize: 12.0),)),
-          DataCell(IconButton(onPressed: ()=> MusicRepositoryImpl().deleteMusic(item.documentID.toString()), icon: const Icon(Icons.delete, size: 18,)),)
+          // DataCell(IconButton(onPressed: ()=> MusicRepositoryImpl().deleteMusic(item.documentID.toString()), icon: const Icon(Icons.delete, size: 18,)),)
         ],),).toList(),
     );
   }
